@@ -6,6 +6,12 @@ import { fileURLToPath } from 'url';
 
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
 
+const debugging = true;
+
+if (debugging === true){
+    const data = ['i', 'am', 'a', 'list']
+}
+
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -24,6 +30,10 @@ const port = process.env.PORT || 3060;
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors())
+
+app.get("/", (req, res) => {
+    let send = data
+})
 
 app.listen(app.listen(port, () => {
     console.log(`listening on : ${port}`)
