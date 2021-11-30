@@ -6,12 +6,9 @@
 <p>...</p>
 
 <ul>
-    <li>Create an account</li>
-    <li>Go to the Sketch tab</li>
-    <li>Select a photo or color for your background</li>
-    <li>Select a pen or shape tool </li>
-    <li>Select a color </li>
-    <li>Get started! </li>
+    <li></li>
+    <li></li>
+    <li></li>
 </ul>
 
 ## 🔨 Installation
