@@ -4,8 +4,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 
-const app = express();
-
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
 
 mongoose.connect(dbUrl, {
