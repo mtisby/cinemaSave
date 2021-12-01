@@ -1,3 +1,9 @@
+import dotenv from "dotenv"
+
+if (process.env.NODE_ENV !== "productions") {
+    dotenv.config()
+}
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from 'mongoose';
@@ -7,10 +13,6 @@ import { fileURLToPath } from 'url';
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
 
 const debugging = true;
-
-if (debugging === true){
-    const data = ['i', 'am', 'a', 'list']
-}
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
