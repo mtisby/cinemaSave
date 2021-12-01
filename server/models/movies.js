@@ -7,6 +7,10 @@ const movieSchema = new Schema({
         type: String,
         required: true
     },
+    year: {
+        type: Number,
+        required: true
+    },
     imdbRating: {
         type: Number,
         required: false
