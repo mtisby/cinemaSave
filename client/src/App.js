@@ -4,6 +4,8 @@ import React, { useEffect } from 'react'
 
 import { getPosts } from './actions/posts'
 
+import { Movies } from './components/Movies';
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -12,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <Movies />
     </div>
   );
 }
