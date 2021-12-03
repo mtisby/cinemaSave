@@ -11,6 +11,7 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { Movie } from "./models/movies.js";
 
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
 
@@ -38,8 +39,10 @@ app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors())
 
-app.get("/", (req, res) => {
-    let send = data
+app.get("/", cors(), async (req, res) => {
+    const allMovies = await Movie.find({});
+    console.log(allMovies)
+    res.json(allMovies) 
 })
 
 app.listen(app.listen(port, () => {

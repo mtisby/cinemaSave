@@ -13,23 +13,23 @@ const movieSchema = new Schema({
     },
     imdbRating: {
         type: Number,
-        required: true
+        required: false
     },
     genre: {
         type: String,
-        required: true
+        required: false
     },
     stream: {
         type: String,
-        required: true
+        required: false
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     languages: {
         type: String,
-        required: true
+        required: false
     },
     poster: {
         type: String,

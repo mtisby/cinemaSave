@@ -1,20 +1,23 @@
 import './App.css';
-import { useDispatch } from 'react-redux'
-import React, { useEffect } from 'react'
-
-import { getPosts } from './actions/posts'
+import React, { useEffect, useState } from 'react'
 
 import { Movies } from './components/Movies';
 
 function App() {
-  const dispatch = useDispatch();
+  const [movie, setMovies] = useState({});
+
   useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch])
+    fetch("http://localhost:3060/")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setMovies(responseJson)
+      });
+  }, []);
 
   return (
     <div className="App">
       <Movies />
+      <h1>movie</h1>
     </div>
   );
 }
