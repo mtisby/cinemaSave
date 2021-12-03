@@ -8,9 +8,14 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from 'mongoose';
 import cors from 'cors';
+import path from 'path';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const debugging = true;
 

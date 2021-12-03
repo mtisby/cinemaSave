@@ -13,7 +13,7 @@ const movieSchema = new Schema({
     },
     imdbRating: {
         type: Number,
-        required: false
+        required: true
     },
     genre: {
         type: String,
@@ -21,7 +21,7 @@ const movieSchema = new Schema({
     },
     stream: {
         type: String,
-        required: false
+        required: true
     },
     description: {
         type: String,
@@ -29,7 +29,7 @@ const movieSchema = new Schema({
     },
     languages: {
         type: String,
-        required: false
+        required: true
     },
     poster: {
         type: String,
