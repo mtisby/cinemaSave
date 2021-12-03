@@ -33,7 +33,6 @@ const watchmode_csvfile = './title_id_map.csv'
 let watchmodeArr = {}
 let keys = ['Watchmode ID', ' IMDB ID', ' TMDB ID', ' TMDB Type'];
 
-
 fs.createReadStream(watchmode_csvfile)
     .pipe(csv.parse({ headers: true }))
     .on('error', error => console.error(error))
@@ -42,107 +41,69 @@ fs.createReadStream(watchmode_csvfile)
     })
     .on('end', rowCount => {
         console.log(`Parsed ${rowCount} rows from Watchmode Movies`)
+        
 
         fetch(imdb_url)
-        .then(res => {
-            return res.json()
-        })
-        .then(imdbData => {
-            let N = imdbData['items'].length;
-            let imdbMovies = imdbData['items'];
-            
-            const seedDB = async () => {
-                for (var i = 0; i < 1; i++) {
-                    let imdbMovie = imdbMovies[i];
+            .then(res => {
+                Movie.deleteMany({});
+                return res.json()
+            })
+            .then(imdbData => {
+                let N = imdbData['items'].length;
+                let imdbMovies = imdbData['items'];
+                
+                let seedDB = () => {
+                    // await Movie.deleteMany({});
 
-                    let title = imdbMovie.fullTitle;
-                    let year = imdbMovie.year;
-                    let rating = imdbMovie.imDbRating;
+                    for (var i = 0; i < 1; i++) {
+                        let imdbMovie = imdbMovies[i];
+
+                        let title = imdbMovie.fullTitle;
+                        let year = imdbMovie.year;
+                        let rating = imdbMovie.imDbRating;
 
 
-                    let queriedTitle = imdbMovie.title.split(' ').join('+');
-                    let queried_ID = watchmodeArr[imdbMovie.id][keys[0]];
+                        let queriedTitle = imdbMovie.title.split(' ').join('+');
+                        let queried_ID = watchmodeArr[imdbMovie.id][keys[0]];
 
 
-                    let watchmodeData = fetch(watchmode_url1+queried_ID+watchmode_url2)
-                    let omdbData = fetch(omdb_url1 + queriedTitle + omdb_url2)
+                        let watchmodeData = fetch(watchmode_url1+queried_ID+watchmode_url2)
+                        let omdbData = fetch(omdb_url1 + queriedTitle + omdb_url2)
 
-                    Promise.all([watchmodeData, omdbData])
-                        .then(values => Promise.all(values.map(value => value.json())))
-                        .then(finalVals => {
-                            let watchmodeData = finalVals[0];
-                            let omdbData = finalVals[1];
+                        Promise.all([watchmodeData, omdbData])
+                            .then(values => Promise.all(values.map(value => value.json())))
+                            .then(finalVals => {
+                                let watchmodeData = finalVals[0];
+                                let omdbData = finalVals[1];
 
-                            let stream = watchmodeData.web_url;
-                            if (stream === undefined) {
-                                stream = "none"
-                            }
-                            
-                            console.log(stream)
-                            const movieObj = new Movie({
-                                title: title,
-                                year: year,
-                                imdbRating: rating,
-                                genre: omdbData.Genre,
-                                stream: stream,
-                                description: omdbData.Plot,
-                                languages: omdbData.Language,
-                                poster: omdbData.Poster
+                                let stream = watchmodeData.web_url;
+                                if (stream === undefined) {
+                                    stream = "none"
+                                }
+
+                                const movie = new Movie({
+                                    title: title,
+                                    year: year,
+                                    imdbRating: rating,
+                                    genre: omdbData.Genre,
+                                    stream: stream,
+                                    description: omdbData.Plot,
+                                    languages: omdbData.Language,
+                                    poster: omdbData.Poster
+                                })
+
+                                movie.save()
+
                             })
-
-                        })
-                        
+                            .catch(e => {
+                                console.log('oops', e)
+                            })
+                    }
                     
                 }
-                await movieObj.save();
-            }
-
-
-        })
-        .catch(e => {
-            console.log('oops', e)
-        })
+                console.log('finished')
+            })
+            .catch(e => {
+                console.log('oops', e)
+            })
     });
-
-
-// seedDB().then(() => {
-//     mongoose.connection.close();
-// })
-
-// for (let i = 0; i < N; i++) {
-//     let movie = movie_data[0];
-//     console.log(movie)
-// }
-
-/* For later !! */
-// const seedDB = async () => {
-//     await Campground.deleteMany({});
-//     for (let i = 0; i < 31; i++) {
-//         const random1000 = Math.floor(Math.random() * 1000);
-//         const price = Math.floor(Math.random() * 20) + 10;
-//         const camp = new Campground({
-//             author: '618c285b033eb93a92b5cc73',
-//             location: `${cities[random1000].city}, ${cities[random1000].state}`,
-//             title: `${sample(descriptors)} ${sample(places)}`,
-//             geometry: {
-//               type: "Point",
-//               coordinates: [
-//                   cities[random1000].longitude,
-//                   cities[random1000].latitude,
-//               ]
-//           },
-//             images: [
-//                 images[i],
-//                 images[i+1]
-//               ],
-//               description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
-//               price
-//           })
-//         await camp.save();
-//         console.log(camp.images[0].url)
-//     }
-// }
-
-// seedDB().then(() => {
-//     mongoose.connection.close();
-// })
