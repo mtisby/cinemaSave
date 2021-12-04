@@ -17,6 +17,7 @@ import session from "express-session"
 
 // routes
 import { UserRoutes } from "./routes/userRoutes.js"
+import { MovieRoutes } from "./routes/movieRoutes.js"
 
 // authentication
 import passport from 'passport'
@@ -105,6 +106,7 @@ app.get("/", cors(), async (req, res) => {
 })
 
 app.use('/authentication', UserRoutes);
+app.use('/movies', MovieRoutes);
 
 app.get("/genre", cors(), async (req, res) => {
    const genre = ["I", "am", "genres"]
