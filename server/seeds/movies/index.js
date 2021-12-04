@@ -5,6 +5,8 @@ import fetch from "node-fetch"
 import * as csv from 'fast-csv'
 import fs from 'fs'
 
+// "http://www.omdbapi.com/?t=Iron+Man&y=&plot=short&tomatoes=true&r=json"
+
 import dotenv from "dotenv"
 dotenv.config({ path: "../../.env" })
 

@@ -1,19 +1,29 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from "react-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
+// style sheets
 import './index.css';
+
+// pages
 import App from './App';
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import { reducers } from './reducers';
-import { useDispatch } from 'react-redux';
+import Profile from './pages/Profile'
+import Register from './pages/Register'
+import Login from './pages/Login'
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
-
-ReactDOM.render(
-  <Provider store={ store }>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+const rootElement = document.getElementById("root");
+render(
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+    </BrowserRouter>,
+  rootElement   
 );
-
