@@ -27,6 +27,7 @@ const handleClick = (props) => {
 function App() {
   const [movie, setMovies] = useState([]);
   const [movieid, setMovieID] = useState([]);
+  const [userid, setUserID] = useState('');
 
   useEffect(() => {
     movieFunctions
@@ -36,35 +37,16 @@ function App() {
         console.log(response)
         setMovies(response.data)
       })
-      // .then((response) => {
-      //   console.log(movie[0])
-      // })
+      .then((response) => {
+        console.log(movie[0])
+      })
   }, []);
 
-  // const handleClick = (e, id) => {
-  //   console.log('on hover',id)
-
-    
-  //   // fetch('http://localhost:3060/authentication/register/', {
-  //   //       method: 'GET',
-  //   //       headers: { "Content-Type": "application/json" },
-  //   //       body: JSON.stringify(user)
-  //   //   }).then((response) => {
-  //   //       console.log('new user added');
-  //   //       let req = response.json()
-  //   //       return req
-  //   //   }).then((req) => {
-  //   //       if (req === 'success') {
-  //   //           setRegister(true)
-  //   //       }
-  //   //   })
-  // }
-
-  // const movies = movie.map((i) => {
-  //   return (<a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}>
-  //   <h1>{i.title}</h1> 
-  //   </a>)
-  // });
+  const movies = movie.map((i) => {
+    return (<a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}>
+    <h1>{i.title}</h1> 
+    </a>)
+  });
   
   return (
     <div className="App">
@@ -75,7 +57,7 @@ function App() {
       <a href="/login">login</a>
       <br />
       <br/>
-      {/* {movies} */}
+      {movies}
     </div>
   );
 }
