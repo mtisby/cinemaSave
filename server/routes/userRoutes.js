@@ -25,6 +25,10 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/login'
     res.json('success')
 })
 
+router.post('/profile/addboard/', async (req, res) => {
+    // find user by id and update
+    console.log('add board')        
+})
 
 const UserRoutes = router
 export { UserRoutes }

@@ -14,7 +14,7 @@ const boardSchema = new Schema({
     pins: {
         type: Array,
         required: false
-    },
+    }
 })
 
 const Board = mongoose.model('Board', boardSchema);

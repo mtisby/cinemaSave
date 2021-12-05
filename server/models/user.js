@@ -12,7 +12,13 @@ const UserSchema = new Schema({
     pins: {
         type: Array,
         required: false
-    }
+    },
+    boards:  [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Board'
+        }
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose);
