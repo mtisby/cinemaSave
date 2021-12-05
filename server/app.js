@@ -101,12 +101,11 @@ app.use((req, res, next) => {
 
 app.get("/", cors(), async (req, res) => {
     const allMovies = await Movie.find({});
-    console.log(allMovies)
     res.json(allMovies) 
 })
 
 app.use('/authentication', UserRoutes);
-app.use('/movies', MovieRoutes);
+app.use('/movie', MovieRoutes);
 
 app.get("/genre", cors(), async (req, res) => {
    const genre = ["I", "am", "genres"]

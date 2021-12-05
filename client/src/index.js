@@ -14,6 +14,7 @@ import App from './App';
 import Profile from './pages/Profile'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import ShowMovie from './pages/ShowIndMovie'
 
 const rootElement = document.getElementById("root");
 render(
@@ -23,6 +24,7 @@ render(
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/movie/:id" element={<ShowMovie />} />
         </Routes>
     </BrowserRouter>,
   rootElement   
