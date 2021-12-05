@@ -33,11 +33,12 @@ function App() {
       .getAll()
       .then((response) => {
         console.log('promise fulfilled')
+        console.log(response)
         setMovies(response.data)
       })
-      .then((response) => {
-        console.log(movie[0])
-      })
+      // .then((response) => {
+      //   console.log(movie[0])
+      // })
   }, []);
 
   // const handleClick = (e, id) => {
@@ -59,11 +60,11 @@ function App() {
   //   //   })
   // }
 
-  const movies = movie.map((i) => {
-    return (<a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}>
-    <h1>{i.title}</h1> 
-    </a>)
-  });
+  // const movies = movie.map((i) => {
+  //   return (<a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}>
+  //   <h1>{i.title}</h1> 
+  //   </a>)
+  // });
   
   return (
     <div className="App">
@@ -74,7 +75,7 @@ function App() {
       <a href="/login">login</a>
       <br />
       <br/>
-      {movies}
+      {/* {movies} */}
     </div>
   );
 }

@@ -101,7 +101,10 @@ app.use((req, res, next) => {
 
 app.get("/", cors(), async (req, res) => {
     const allMovies = await Movie.find({});
-    res.json(allMovies) 
+    res.json({
+        'movies': allMovies,
+        'user': req.user
+    })
 })
 
 app.use('/authentication', UserRoutes);
