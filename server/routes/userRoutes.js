@@ -30,5 +30,20 @@ router.post('/profile/addboard/', async (req, res) => {
     console.log('add board')        
 })
 
+router.post('/profile/deleteboard/', async (req, res) => {
+    // find user by id and update
+    console.log('delete board')        
+})
+
+router.post('/profile/addpin/', async (req, res) => {
+    // find user by id and update
+    console.log('add pin')        
+})
+
+router.post('/profile/deletepin/', async (req, res) => {
+    // find user by id and update
+    console.log('delete pin')        
+})
+
 const UserRoutes = router
 export { UserRoutes }
