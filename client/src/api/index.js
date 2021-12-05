@@ -3,9 +3,10 @@ import axios from 'axios';
 
 const url = 'http://localhost:3060/';
 const movie_url = 'movie/'
+const home_url = 'home/'
 
 const getAll = () => {
-    return axios.get(url)
+    return axios.get(url+home_url)
 }
 
 const getByID = (movie_id) => {

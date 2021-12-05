@@ -99,7 +99,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get("/", cors(), async (req, res) => {
+app.get("/home", cors(), async (req, res) => {
     const allMovies = await Movie.find({});
     res.json(allMovies)
 })

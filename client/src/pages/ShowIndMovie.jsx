@@ -4,7 +4,7 @@ function ShowMovie() {
 
     return (
         <div className="showMovie">
-          <a href="/">link to home</a>
+          <a href="/home">link to home</a>
             <h1>I show da movies</h1>
             <MovieSM />
         </div>

@@ -6,7 +6,7 @@ function Profile() {
   
     return (
         <div className="profile">
-          <a href="/">link to home</a>
+          <a href="/home">link to home</a>
           <h1>I am profile</h1>
           <UserProfile />
         </div>
