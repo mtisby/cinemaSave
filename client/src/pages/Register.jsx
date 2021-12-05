@@ -7,6 +7,7 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [registered, setRegister] = useState(false);
+    const [id, setID] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,14 +23,15 @@ function Register() {
             return req
         }).then((req) => {
             if (req === 'success') {
-                setRegister(true)
+                setRegister(true);
+                setID(req);
             }
         })
     }
   
-    if (registered) {
+    if (registered === true && id !== " ")  {
         return <Navigate push to={{
-            pathname: '/profile'
+            pathname: `/profile/${id}`
           }}
         />
     }

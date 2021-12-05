@@ -107,11 +107,6 @@ app.get("/", cors(), async (req, res) => {
 app.use('/authentication', UserRoutes);
 app.use('/movie', MovieRoutes);
 
-app.get("/genre", cors(), async (req, res) => {
-   const genre = ["I", "am", "genres"]
-    res.json(genre) 
-})
-
 app.listen(app.listen(port, () => {
     console.log(`listening on : ${port}`)
 }))

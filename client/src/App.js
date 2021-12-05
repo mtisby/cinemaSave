@@ -67,12 +67,13 @@ function App() {
   
   return (
     <div className="App">
-      <a href="/profile">link to profile</a>
-      <br />
-      
+      {/* <a href="/profile">link to profile</a> */}
+      <br/>
       <a href="/register">register</a>
-      <br />
+      <br/>
       <a href="/login">login</a>
+      <br />
+      <br/>
       {movies}
     </div>
   );

@@ -21,7 +21,7 @@ render(
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/movie/:id" element={<ShowMovie />} />

@@ -14,15 +14,16 @@ router.post('/register', async (req, res) => {
                 return next(error)
             }
         })
-        res.json('success');
+        res.json(req.user._id)
     } catch (e) {
         console.log(e)
     }
 })
 
 router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
-    console.log('login:')
-    res.json('success')
+    console.log(req.user._id)
+    console.log(typeof req.user._id)
+    res.json(req.user._id)
 })
 
 router.post('/profile/addboard/', async (req, res) => {

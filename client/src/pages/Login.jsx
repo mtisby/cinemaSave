@@ -5,6 +5,7 @@ function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loggedin, setLogin] = useState(false);
+    const [id, setID] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,17 +18,20 @@ function Login(props) {
         }).then((response) => {
             console.log('logged in');
             let req = response.json()
+            console.log(req)
             return req
         }).then((req) => {
-            if (req === 'success') {
-               setLogin(true)
+            console.log(req)
+            if (req !== 'success') {
+                setID(req);
+                setLogin(true);
             }
         })
     }
 
-    if (loggedin) {
+    if (loggedin === true && id !== " ") {
         return <Navigate push to={{
-            pathname: '/profile'
+            pathname: `/profile/${id}`
           }}
         />
     }
