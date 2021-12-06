@@ -14,6 +14,8 @@ import { dirname } from 'path';
 import { Movie } from "./models/movies.js";
 
 import session from "express-session"
+import cookieParser from "cookie-parser";
+import methodOverride from "method-override"
 
 // routes
 import { UserRoutes } from "./routes/userRoutes.js"
@@ -22,6 +24,9 @@ import { MovieRoutes } from "./routes/movieRoutes.js"
 // authentication
 import passport from 'passport'
 import LocalStrategy from 'passport-local'
+let localStrategy = LocalStrategy.Strategy
+import * as ExpressError from "./utilis/ExpressError.cjs"
+import isLoggedIn from "./middleware/middleware.cjs"
 
 // models
 import { User } from './models/user.js'
@@ -52,6 +57,9 @@ const app = express();
 const port = process.env.PORT || 3060;
 
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+app.use(express.static(__dirname + '/public'));
 
 
 const secret = 'hello'
@@ -85,11 +93,15 @@ app.use(session(sessionConfig))
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}))
 
+app.use(cookieParser(secret))
 app.use(passport.initialize())
 app.use(passport.session())
-passport.use(new LocalStrategy(User.authenticate()))
+passport.use(new localStrategy(User.authenticate()))
 
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
@@ -99,13 +111,26 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get("/home", cors(), async (req, res) => {
+app.get("/home", cors(), isLoggedIn, async (req, res) => {
     const allMovies = await Movie.find({});
+    console.log(req.locals)
     res.json(allMovies)
 })
 
 app.use('/authentication', UserRoutes);
 app.use('/movie', MovieRoutes);
+
+
+app.all('*', (req, res, next) => {
+    next(new ExpressError('Page Not Found', 404))
+})
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500, message = "something went wrong" } = err;
+    res.status(statusCode)
+    res.json(err)
+})
+
 
 app.listen(app.listen(port, () => {
     console.log(`listening on : ${port}`)

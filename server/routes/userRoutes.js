@@ -20,9 +20,10 @@ router.post('/register', async (req, res) => {
     }
 })
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+router.post('/login', passport.authenticate('local'), (req, res) => {
     console.log(req.user._id)
     console.log(typeof req.user._id)
+    console.log(req.user)
     res.json(req.user._id)
 })
 
