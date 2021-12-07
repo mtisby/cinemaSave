@@ -21,9 +21,6 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-    console.log(req.user._id)
-    console.log(typeof req.user._id)
-    console.log(req.user)
     res.json({'user_id':req.user._id, 'username':req.user.username})
 })
 
@@ -38,8 +35,9 @@ router.post('/profile/deleteboard/', async (req, res) => {
 })
 
 router.post('/profile/addpin/', async (req, res) => {
-    // find user by id and update
-    console.log('add pin')        
+    console.log('add pin')
+    console.log(req.body)
+    res.send('aaayyy')
 })
 
 router.post('/profile/deletepin/', async (req, res) => {

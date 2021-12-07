@@ -113,7 +113,6 @@ app.use((req, res, next) => {
 
 app.get("/home", cors(), isLoggedIn, async (req, res) => {
     const allMovies = await Movie.find({});
-    console.log(req.locals)
     res.json(allMovies)
 })
 

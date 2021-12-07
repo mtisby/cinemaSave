@@ -8,27 +8,46 @@ import {ReactSession} from 'react-client-session';
 // style sheets
 import './home.css';
 
-const handleClick = (props) => {
-    const id = props;
-    
-    fetch('http://localhost:3060/movie/id', {
-          method: 'POST',
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id })
-      }).then((response) => {
-        let req = response.json()
-        return req
-      }).then((req) => {
-        if (req !== undefined) {
-          <Route to={`/movie/:${id}`} component={ MovieSM }/>
-        }
-      })
-  }
+const handleSubmit = (props) => {
+  console.log(props.user_id)
+//   fetch('http://localhost:3060/authentication/profile/addpin/', {
+//       method: 'POST',
+//       headers: { "Content-Type": "application/json" },
+//       body: {
+//         'user_id': user_id,
+//         'movie_id': movie_id
+//       }
+//   }).then((response) => {
+//       let req = response.json()
+//       console.log(req)
+//       return req
+//   }).then((req) => {
+//     console.log(req)
+//     return req
+// })
+}
 
+const handleClick = (props) => {
+  const id = props;
+    
+  fetch('http://localhost:3060/movie/id', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id })
+  }).then((response) => {
+    let req = response.json()
+    return req
+  }).then((req) => {
+    if (req !== undefined) {
+      <Route to={`/movie/:${id}`} component={MovieSM} />
+    }
+  })
+}
 
 function Home(props) {
   const [movie, setMovies] = useState([]);
-  const [movieid, setMovieID] = useState([]);
+  const [user_id, setUserID] = useState('');
+  const [movie_id, setMovieID] = useState('');
 
   useEffect(() => {
     movieFunctions
@@ -42,16 +61,34 @@ function Home(props) {
       })
   }, []);
 
+  let userid = ReactSession.get("userid") 
   const movies = movie.map((i) => {
     return (
       <div>
         <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a>
         <img src={i.poster} alt="la" class="poster" />
         <br />
-        <button>save</button>
+
+        <form  onSubmit={handleSubmit.bind(this)}>
+          <label htmlFor="movieID">movie id</label>
+          <input
+            type="text"
+            value={i._id}
+            id="movieID"
+          />
+          <br />
+          <label htmlFor="userID">user id</label>
+          <input
+            type="text"
+            value={userid}
+            id="userID"
+          />
+          <br />
+          
+          <button>submit</button>
+        </form>
       </div>)
   });
-  let userid = ReactSession.get("userid") 
 
   return (
     <div className="Home">
