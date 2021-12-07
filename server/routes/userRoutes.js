@@ -24,7 +24,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     console.log(req.user._id)
     console.log(typeof req.user._id)
     console.log(req.user)
-    res.json(req.user._id)
+    res.json({'user_id':req.user._id, 'username':req.user.username})
 })
 
 router.post('/profile/addboard/', async (req, res) => {
