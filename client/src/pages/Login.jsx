@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom';
 
+import {ReactSession} from 'react-client-session';
+
+
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,8 +26,12 @@ function Login(props) {
         }).then((req) => {
             console.log(req)
             if (req !== 'success') {
-                setID(req);
+                console.log('og im id', req.user_id)
+                console.log('og im name', req.username)
+                setID(req.user_id);
                 setLogin(true);
+                ReactSession.set("username", req.username);
+                ReactSession.set("userid", req.user_id);
             }
         })
     }

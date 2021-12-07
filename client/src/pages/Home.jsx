@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 // import { Navigate } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Route, Link} from 'react-router-dom';
 import movieFunctions from "../api/index.js"
 import { MovieSM } from '../components/MovieSM';
+import {ReactSession} from 'react-client-session';
+
+// style sheets
+import './home.css';
 
 const handleClick = (props) => {
     const id = props;
@@ -22,10 +26,9 @@ const handleClick = (props) => {
   }
 
 
-function Home() {
+function Home(props) {
   const [movie, setMovies] = useState([]);
   const [movieid, setMovieID] = useState([]);
-  const [userid, setUserID] = useState('');
 
   useEffect(() => {
     movieFunctions
@@ -36,20 +39,25 @@ function Home() {
         setMovies(response.data)
       })
       .then((response) => {
-        console.log(movie[0])
       })
   }, []);
 
   const movies = movie.map((i) => {
-    return (<a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}>
-    <h1>{i.title}</h1> 
-    </a>)
+    return (
+      <div>
+        <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a>
+        <img src={i.poster} alt="la" class="poster" />
+        <br />
+        <button>save</button>
+      </div>)
   });
-  
+  let userid = ReactSession.get("userid") 
+
   return (
     <div className="Home">
+      <Link to={`/profile/${userid}`}>Profile</Link>
       <h1>I am the Home Page</h1>
-      <br/>
+      <br />
       
       {movies}
     </div>

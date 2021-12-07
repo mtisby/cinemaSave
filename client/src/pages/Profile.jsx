@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import movieFunctions from "../api/index.js"
-import { UserProfile } from '../components/UserProfile.jsx';
+import { ReactSession } from 'react-client-session'
+import {Link} from 'react-router-dom'
 
 function Profile() {
   
     return (
         <div className="profile">
-          <a href="/home">link to home</a>
-          <h1>I am profile</h1>
-          <UserProfile />
+          <Link to="/home">home</Link>
+          <h1>Welcome { ReactSession.get("username") }</h1>
         </div>
       );
 }
