@@ -3,12 +3,12 @@
 <p>This project is a web app made to  <a href="#">here</a></p>
 
 ## 💻 What it does
-<p>...</p>
+<p>*Catchy name* is a Pinterest-style web app which allows users organize movies into boards, find similar movies, and get a movie recommendation based on a specified genre and streaming platform</p>
 
 <ul>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>Login or Register</li>
+    <li>Go to the Homepage</li>
+    <li>Start saving movies!</li>
 </ul>
 
 ## 🔨 Installation
@@ -16,14 +16,19 @@ Clone the repository and run the following in your terminal:
 ```bash
 > npm i
 ```
-This installs all neccessary packages. Mext, run the following:
-```bash
-> node app.js
-```
-In a separate terminal run the following: 
+This installs all neccessary packages. Next, run the following:
 ```bash
 > mongod
 ```
+In a separate terminal navigate to '/server' and run the following: 
+```bash
+> node app.js
+```
+In another separate terminal navigate to '/client' and run the following: 
+```bash
+> npm start
+```
+
 This activates MongoDB on your local device; however, note that cloning this repo to your local device means that the database will be empty. To see the full effect of the web app, create an account to put your first bit of data into your local database.
 
 ## 🔨 How we built it
@@ -32,14 +37,13 @@ This activates MongoDB on your local device; however, note that cloning this rep
 <h5>Languages Used</h5>
 <ul>
     <li>JavaScript</li>
-    <li>EJS</li>
     <li>CSS</li>
 </ul>
 
 <h5>Frameworks</h5>
 <ul>
-    <li>Express</li>
     <li>React</li>
+    <li>Express</li>
 </ul>
 
 <h5>Cloud Storage & Databases</h5>
