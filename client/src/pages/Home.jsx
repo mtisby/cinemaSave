@@ -43,7 +43,19 @@ const handleClick = (props) => {
   })
 }
 
-function Home(props) {
+const handleButtonClick = (props) => {
+    
+  fetch('http://localhost:3060/authentication/profile/addpin/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(props)
+  }).then((response) => {
+    let req = response.json()
+    return req
+  })
+}
+
+function Home() {
   const [movie, setMovies] = useState([]);
 
   useEffect(() => {
@@ -65,7 +77,7 @@ function Home(props) {
         {/* <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a> */}
         <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)}><h1>{i.title}</h1></Link>
         <img src={i.poster} alt="la" class="poster" />
-        <br />
+        <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>save</button>
 
         {/* <form  onSubmit={handleSubmit.bind(this)}>
           <label htmlFor="movieID">movie id</label>
