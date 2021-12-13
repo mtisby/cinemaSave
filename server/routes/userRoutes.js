@@ -24,6 +24,16 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     res.json({'user_id':req.user._id, 'username':req.user.username})
 })
 
+router.post('/profile', async (req, res) => {
+    console.log(req.body)
+    const userID = req.body.user_id;
+    const user = await User.findById(userID).populate({
+        path: 'pins'
+    });   
+    console.log(user)
+    res.json(user)
+})
+
 router.post('/profile/addboard/', async (req, res) => {
     // find user by id and update
     console.log('add board')        

@@ -9,10 +9,12 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
-    pins: {
-        type: Array,
-        required: false
-    },
+    pins: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Movie'
+        }
+    ],
     boards:  [
         {
             type: Schema.Types.ObjectId,

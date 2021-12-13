@@ -8,24 +8,6 @@ import {ReactSession} from 'react-client-session';
 // style sheets
 import './home.css';
 
-// const handleSubmit = (props) => {
-//   console.log(props.userID)
-// //   fetch('http://localhost:3060/authentication/profile/addpin/', {
-// //       method: 'POST',
-// //       headers: { "Content-Type": "application/json" },
-// //       body: {
-// //         'user_id': 'none',
-// //       }
-// //   }).then((response) => {
-// //       let req = response.json()
-// //       console.log(req)
-// //       return req
-// //   }).then((req) => {
-// //     console.log(req)
-// //     return req
-// // })
-// }
-
 const handleClick = (props) => {
   const id = props;
     
@@ -74,29 +56,10 @@ function Home() {
   const movies = movie.map((i) => {
     return (
       <div>
-        {/* <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a> */}
         <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)}><h1>{i.title}</h1></Link>
         <img src={i.poster} alt="la" class="poster" />
         <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>save</button>
 
-        {/* <form  onSubmit={handleSubmit.bind(this)}>
-          <label htmlFor="movieID">movie id</label>
-          <input
-            type="text"
-            value={i._id}
-            id="movieID"
-          />
-          <br />
-          <label htmlFor="userID">user id</label>
-          <input
-            type="text"
-            value={userid}
-            id="userID"
-          />
-          <br />
-          
-          <button>submit</button>
-        </form> */}
       </div>)
   });
 
