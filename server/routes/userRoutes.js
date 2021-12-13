@@ -35,9 +35,13 @@ router.post('/profile/deleteboard/', async (req, res) => {
 })
 
 router.post('/profile/addpin/', async (req, res) => {
-    console.log('add pin')
     console.log(req.body)
-    res.send('aaayyy')
+    const userID = req.body.userID;
+    const movieID = req.body.movieID;
+    const user = await User.findById(userID);
+    user.pins.push(movieID)
+    console.log(user)
+    user.save()
 })
 
 router.post('/profile/deletepin/', async (req, res) => {
