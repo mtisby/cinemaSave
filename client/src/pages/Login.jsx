@@ -21,13 +21,9 @@ function Login(props) {
         }).then((response) => {
             console.log('logged in');
             let req = response.json()
-            console.log(req)
             return req
         }).then((req) => {
-            console.log(req)
             if (req !== 'success') {
-                console.log('og im id', req.user_id)
-                console.log('og im name', req.username)
                 setID(req.user_id);
                 setLogin(true);
                 ReactSession.set("username", req.username);

@@ -8,24 +8,23 @@ import {ReactSession} from 'react-client-session';
 // style sheets
 import './home.css';
 
-const handleSubmit = (props) => {
-  console.log(props.user_id)
-//   fetch('http://localhost:3060/authentication/profile/addpin/', {
-//       method: 'POST',
-//       headers: { "Content-Type": "application/json" },
-//       body: {
-//         'user_id': user_id,
-//         'movie_id': movie_id
-//       }
-//   }).then((response) => {
-//       let req = response.json()
-//       console.log(req)
-//       return req
-//   }).then((req) => {
-//     console.log(req)
-//     return req
-// })
-}
+// const handleSubmit = (props) => {
+//   console.log(props.userID)
+// //   fetch('http://localhost:3060/authentication/profile/addpin/', {
+// //       method: 'POST',
+// //       headers: { "Content-Type": "application/json" },
+// //       body: {
+// //         'user_id': 'none',
+// //       }
+// //   }).then((response) => {
+// //       let req = response.json()
+// //       console.log(req)
+// //       return req
+// //   }).then((req) => {
+// //     console.log(req)
+// //     return req
+// // })
+// }
 
 const handleClick = (props) => {
   const id = props;
@@ -46,8 +45,6 @@ const handleClick = (props) => {
 
 function Home(props) {
   const [movie, setMovies] = useState([]);
-  const [user_id, setUserID] = useState('');
-  const [movie_id, setMovieID] = useState('');
 
   useEffect(() => {
     movieFunctions
@@ -65,11 +62,12 @@ function Home(props) {
   const movies = movie.map((i) => {
     return (
       <div>
-        <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a>
+        {/* <a onClick={() => handleClick(i._id)} href={`/movie/${i._id}`}><h1>{i.title}</h1></a> */}
+        <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)}><h1>{i.title}</h1></Link>
         <img src={i.poster} alt="la" class="poster" />
         <br />
 
-        <form  onSubmit={handleSubmit.bind(this)}>
+        {/* <form  onSubmit={handleSubmit.bind(this)}>
           <label htmlFor="movieID">movie id</label>
           <input
             type="text"
@@ -86,7 +84,7 @@ function Home(props) {
           <br />
           
           <button>submit</button>
-        </form>
+        </form> */}
       </div>)
   });
 
