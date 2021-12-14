@@ -44,29 +44,34 @@ router.post('/profile/deleteboard/', async (req, res) => {
 })
 
 router.post('/profile/addpin/', async (req, res) => {
-    console.log(req.body)
     const userID = req.body.userID;
     const movieID = req.body.movieID;
     const user = await User.findById(userID);
     user.pins.push(movieID)
-    console.log(user)
+
     user.save()
 })
 
 router.post('/profile/deletepin/', async (req, res) => {
-    console.log('delete pin')
-    console.log('req.body: ', req.body)
     const userID = req.body.userID;
+    const user = await User.findById(userID).populate({
+        path: 'pins'
+    });
     const movieID = req.body.movieID;
-    const user = await User.findById(userID);
+    let movie = await Movie.findById(movieID);
+    
     const allPins = user.pins
-    console.log(allPins)
+    
     for (var i = 0; i < allPins.length; i++) { 
-        let movie = await Movie.findById(movieID)
-        let id = movie._id
-        console.log(id)
+        let string1 = allPins[i]._id.toString()
+        let string2 = movie._id.toString()
+
+        console.log(string2)
+        if (string1 === string2) { 
+            allPins.splice(i, 1);
+        }
     }
-    console.log(user)
+
     user.save()
 })
 

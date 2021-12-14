@@ -16,10 +16,14 @@ function Profile() {
         return response.data
       })
       .then((response) => {
-        console.log(response.pins)
+        try {
+          console.log(response.pins)
 
-        setPins(response.pins)
-        setBoards(response.boards)
+          setPins(response.pins)
+          setBoards(response.boards)
+        } catch (e) { 
+          console.log(e)
+        }
       })
   }, []);
 
