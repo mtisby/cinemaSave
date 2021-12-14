@@ -1,5 +1,6 @@
 import express from "express"
 import passport from "passport"
+import { Movie } from "../models/movies.js"
 import { User } from "../models/user.js";
 
 const router = express.Router()
@@ -25,12 +26,10 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 })
 
 router.post('/profile', async (req, res) => {
-    console.log(req.body)
     const userID = req.body.user_id;
     const user = await User.findById(userID).populate({
         path: 'pins'
     });   
-    console.log(user)
     res.json(user)
 })
 
@@ -55,8 +54,20 @@ router.post('/profile/addpin/', async (req, res) => {
 })
 
 router.post('/profile/deletepin/', async (req, res) => {
-    // find user by id and update
-    console.log('delete pin')        
+    console.log('delete pin')
+    console.log('req.body: ', req.body)
+    const userID = req.body.userID;
+    const movieID = req.body.movieID;
+    const user = await User.findById(userID);
+    const allPins = user.pins
+    console.log(allPins)
+    for (var i = 0; i < allPins.length; i++) { 
+        let movie = await Movie.findById(movieID)
+        let id = movie._id
+        console.log(id)
+    }
+    console.log(user)
+    user.save()
 })
 
 const UserRoutes = router

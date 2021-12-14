@@ -23,13 +23,28 @@ function Profile() {
       })
   }, []);
 
+  const handleButtonClick = (props) => {
+    
+    fetch('http://localhost:3060/authentication/profile/deletepin/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(props)
+    }).then((response) => {
+      let req = response.json()
+      return req
+    })
+  }
+
   console.log('pins', typeof pins, pins)
   console.log('boards', boards)
 
   const allPins = pins.map((i) => {
     return (
       <div>
-        <p>{ i.title }</p>
+        <p>{i.title}</p>
+        <img src={i.poster} alt="poster" class="poster" />
+        <br />
+        <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
       </div>)
   });
 
