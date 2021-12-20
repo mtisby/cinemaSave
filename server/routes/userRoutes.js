@@ -73,6 +73,8 @@ router.post('/profile/deletepin/', async (req, res) => {
     }
 
     user.save()
+
+    res.json({'pins': allPins, 'boards': user.boards})
 })
 
 const UserRoutes = router

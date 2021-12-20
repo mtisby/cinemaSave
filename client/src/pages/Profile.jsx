@@ -17,8 +17,6 @@ function Profile() {
       })
       .then((response) => {
         try {
-          console.log(response.pins)
-
           setPins(response.pins)
           setBoards(response.boards)
         } catch (e) { 
@@ -34,15 +32,22 @@ function Profile() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(props)
     }).then((response) => {
-      let req = response.json()
-      return req
+      response = response.json()
+      return response
+    }).then((data) => { 
+      try {
+        setPins(data.pins)
+        setBoards(data.boards)
+      } catch (e) { 
+        console.log(e)
+      }
     })
   }
 
   console.log('pins', typeof pins, pins)
   console.log('boards', boards)
 
-  const allPins = pins.map((i) => {
+  const allPins = pins.slice(0).reverse().map((i) => {
     return (
       <div>
         <p>{i.title}</p>
