@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import movieFunctions from "../api/index.js";
 
+// style sheets
+import './profile.css';
+
 function Profile() {
   let userid = ReactSession.get("userid") 
   const [pins, setPins] = useState([]);
@@ -49,9 +52,13 @@ function Profile() {
 
   const allPins = pins.slice(0).reverse().map((i) => {
     return (
-      <div>
-        <p>{i.title}</p>
-        <img src={i.poster} alt="poster" class="poster" />
+      <div className='movie-contianer-profile'>
+         <img src={i.poster} alt={ `${i.title} poster`} className='poster'/>
+          <div className='movie-descrip'>
+            <h3>{i.title}</h3>
+            <h5>imdb: { i.imdbRating } </h5>
+            <h5>genre(s): { i.genre } </h5>
+          </div>
         <br />
         <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
       </div>)
@@ -61,7 +68,9 @@ function Profile() {
         <div className="profile">
           <Link to="/home">home</Link>
           <h1>Welcome {ReactSession.get("username")}</h1>
-          { allPins }
+          <div className='movies-contianer'>
+            {allPins}
+          </div>
         </div>
       );
 }

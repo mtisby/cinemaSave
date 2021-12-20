@@ -2,10 +2,6 @@ html{
     --off-white: #F0F0F0;
 }
 
-.Home-Pg Link{
-    text-decoration: none;
-}
-
 .hide{
     display: none;
 }
@@ -18,7 +14,7 @@ html{
     justify-content: center;
 }
 
-.movie-container{
+.movie-contianer-profile{
     background-color: var(--off-white);
     border: 1px solid var(--off-white);
     border-radius: 2.5em;
@@ -41,6 +37,15 @@ html{
     width: 15em;
 }
 
+.movie-descrip{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    width: 75%;
+}
+
 .movie-descrip h5{
     margin: 0;
 }
@@ -53,7 +58,7 @@ html{
     margin: 1em;
 }
 
-.movie-container:hover{
+.movie-contianer-profile:hover{
     box-shadow: 0 0 50px rgba(80, 80, 80, 0.657);
     transform: translateY(-0.25em);
 }

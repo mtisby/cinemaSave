@@ -48,28 +48,30 @@ function Home() {
         console.log(response)
         setMovies(response.data)
       })
-      .then((response) => {
-      })
   }, []);
 
   let userid = ReactSession.get("userid") 
   const movies = movie.map((i) => {
     return (
-      <div>
-        <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)}><h1>{i.title}</h1></Link>
-        <img src={i.poster} alt="la" class="poster" />
-        <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>save</button>
-
-      </div>)
+        <div className='movie-container'>
+          <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)} style={{ textDecoration: 'none', color:'black'}}><img src={i.poster} alt={ `${i.title} poster`} className='poster'/></Link>
+          <div className='movie-descrip'>
+            <h3>{i.title}</h3>
+            <h5>imdb: { i.imdbRating } </h5>
+            <h5>genre(s): { i.genre } </h5>
+          </div>
+          <button className='save-btn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>save</button>
+        </div>)
   });
 
   return (
-    <div className="Home">
+    <div className="Home-Pg">
       <Link to={`/profile/${userid}`}>Profile</Link>
       <h1>I am the Home Page</h1>
       <br />
-      
-      {movies}
+      <div className='movies-contianer'>
+        {movies}
+      </div>
     </div>
   );
 }
