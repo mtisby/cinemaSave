@@ -65,13 +65,17 @@ function Profile() {
   });
 
     return (
-        <div className="profile">
-          <Link to="/home">home</Link>
-          <h1>Welcome {ReactSession.get("username")}</h1>
-          <div className='movies-contianer'>
-            {allPins}
-          </div>
+      <div className="profile">
+        <Link to="/home">home</Link>
+        <h1>Welcome {ReactSession.get("username")}</h1>
+        <div>
+          <h3>Boards</h3>
+          <button>+</button>
         </div>
+        <div className='movies-contianer'>
+          {allPins}
+        </div>
+      </div>
       );
 }
   
