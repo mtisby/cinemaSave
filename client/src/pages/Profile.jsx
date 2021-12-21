@@ -2,6 +2,7 @@ import { ReactSession } from 'react-client-session';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import movieFunctions from "../api/index.js";
+import { BoardPopup } from '../components/BoardPopup.jsx';
 
 // style sheets
 import './profile.css';
@@ -10,6 +11,7 @@ function Profile() {
   let userid = ReactSession.get("userid") 
   const [pins, setPins] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [popupval, setPopupVal] = useState(Boolean);
 
   useEffect(() => {
     movieFunctions
@@ -47,6 +49,10 @@ function Profile() {
     })
   }
 
+  const handleAddButton = () => { 
+    setPopupVal(true)
+  }
+
   console.log('pins', typeof pins, pins)
   console.log('boards', boards)
 
@@ -70,7 +76,8 @@ function Profile() {
         <h1>Welcome {ReactSession.get("username")}</h1>
         <div>
           <h3>Boards</h3>
-          <button>+</button>
+          <button onClick={handleAddButton} >+</button>
+          <BoardPopup value={ popupval } />
         </div>
         <div className='movies-contianer'>
           {allPins}
