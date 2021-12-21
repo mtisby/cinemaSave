@@ -51,7 +51,7 @@ export const MovieSM = (props) => {
   });
 
     return (
-      <div>
+      <div className="movie-show-pg">
         <div className="movie-container-row">
           <div className="div-left">
             <img className="poster" src={movie.poster} alt={`${movie.title} poster`} />
@@ -59,11 +59,15 @@ export const MovieSM = (props) => {
           </div>
           <div className="movie-desrip-show">
             <h1>{movie.title}</h1>
-            <h1>{movie.imdbRating}</h1>
+            <h3>{movie.imdbRating}</h3>
             <div className="allgenres">{allgenres}</div>
-            <h5>{movie.description}</h5>
+            <h4>{movie.description}</h4>
+            <h5>languages: {movie.languages}</h5>
+        
+            <h5>Watch it here: { movie.stream }</h5>
           </div>
         </div>
       </div>
+
     );
 }
