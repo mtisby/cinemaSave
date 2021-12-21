@@ -1,0 +1,38 @@
+.movie-container-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.div-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 1em;
+}
+
+.movie-desrip-show{
+    width: 30vw;
+    margin: 1em;
+}
+
+.allgenres{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre{
+    background-color: orange;
+    color: black;
+    border: orange solid 1px;
+    border-radius: .5em;
+    font-weight: bold;
+
+    margin: 2em;
+    padding: 1em;
+}

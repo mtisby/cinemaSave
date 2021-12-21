@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import movieFunctions from "../api/index"
+import { ReactSession } from 'react-client-session';
+
+// style sheets
+import './moviesm.css';
 
 export const MovieSM = (props) => {
     const { id } = useParams();
@@ -19,36 +23,47 @@ export const MovieSM = (props) => {
           })
       }, []);
 
-      const handleSubmit = (e) => {
-        // e.preventDefault();
-        // const user = { username, password };
-
-        // fetch('http://localhost:3060/authentication/login/', {
-        //     method: 'POST',
-        //     headers: { "Content-Type": "application/json" },
-        //     body: JSON.stringify(user)
-        // }).then((response) => {
-        //     console.log('logged in');
-        //     let req = response.json()
-        //     console.log(req)
-        //     return req
-        // }).then((req) => {
-        //     console.log(req)
-        //     if (req !== 'success') {
-        //         setID(req);
-        //         setLogin(true);
-        //     }
-        // })
-    }
+    const handleButtonClick = (e) => {
+      // fetch('http://localhost:3060/authentication/profile/deletepin/', {
+      //   method: 'POST',
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(props)
+      // }).then((response) => {
+      //   response = response.json()
+      //   return response
+      // }).then((data) => { 
+      //   try {
+      //     setPins(data.pins)
+      //     setBoards(data.boards)
+      //   } catch (e) { 
+      //     console.log(e)
+      //   }
+      // })
+  }
+  let genres = movie.genre + ''
+  genres = genres.split(',')
+ 
+  const allgenres= genres.map((i) => {
     return (
-        <div>
-          <form onSubmit={handleSubmit.bind(this)}>
+      <div className='genre'>
+        { i }
+      </div>)
+  });
+
+    return (
+      <div>
+        <div className="movie-container-row">
+          <div className="div-left">
+            <img className="poster" src={movie.poster} alt={`${movie.title} poster`} />
+            <button onClick={() => handleButtonClick({ 'movieID': movie._id, 'userID': ReactSession.get("userid") })}>save</button>
+          </div>
+          <div className="movie-desrip-show">
             <h1>{movie.title}</h1>
             <h1>{movie.imdbRating}</h1>
-            <p>{movie.genre}</p>
-
-            <button> save </button>
-          </form>
+            <div className="allgenres">{allgenres}</div>
+            <h5>{movie.description}</h5>
+          </div>
         </div>
+      </div>
     );
 }
