@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import movieFunctions from "../api/index.js";
 import { BoardPopup } from '../components/BoardPopup.jsx';
+import { BoardsProfile } from '../components/BoardsProfile';
 
 // style sheets
 import './profile.css';
@@ -77,6 +78,7 @@ function Profile() {
         <div>
           <h3>Boards</h3>
           <button onClick={handleAddButton} >+</button>
+          <BoardsProfile data={ userid } />
           <BoardPopup value={ popupval } />
         </div>
         <div className='movies-contianer'>
