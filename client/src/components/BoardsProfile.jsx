@@ -29,10 +29,8 @@ export const BoardsProfile = (props) => {
       });
 
     return (
-        <div>
-            <div>
-                {allBoards}
-            </div>
+        <div className='boards-container'>
+            {allBoards}
         </div>
     )
 }

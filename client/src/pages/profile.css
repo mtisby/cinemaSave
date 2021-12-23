@@ -66,7 +66,27 @@ html{
 /*
     boards
 */
+.boards-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.boards-header div{
+    margin: .25em;
+}
+
 .board-contianer-profile{
     background-color: rgb(135, 135, 212);
-    width: 30vw;
+    margin: 1.5em;
+    width: 20vw;
+}
+
+.boards-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

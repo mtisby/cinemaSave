@@ -76,8 +76,12 @@ function Profile() {
         <Link to="/home">home</Link>
         <h1>Welcome {ReactSession.get("username")}</h1>
         <div>
-          <h3>Boards</h3>
-          <button onClick={handleAddButton} >+</button>
+          <div className='boards-header'>
+            <div>
+              <h3>Boards</h3>
+            </div>
+            <div><button onClick={handleAddButton} >+</button></div>
+          </div>
           <BoardsProfile data={ userid } />
           <BoardPopup value={ popupval } />
         </div>
