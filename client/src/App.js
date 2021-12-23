@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 function App() {
+  console.log(React.version)
   return (
     <div className="App">
       <h1>Welcome to Splash Page</h1>

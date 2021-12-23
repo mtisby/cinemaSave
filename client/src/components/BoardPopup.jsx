@@ -32,7 +32,7 @@ export const BoardPopup = (props) => {
 
     if (popupBool) { 
         
-        return <Navigate push to={{
+        return <Navigate to={{
             pathname: `/profile/${userid}/board/${boardID}`
             }}
         />
