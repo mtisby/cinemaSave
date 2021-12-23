@@ -17,8 +17,20 @@ const UserSchema = new Schema({
     ],
     boards:  [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Board'
+            title: {
+                type: String,
+                required: true
+            },
+            description: {
+                type: String,
+                required: false
+            },
+            pins: [
+                {
+                    type: Schema.Types.ObjectId,
+                    ref: 'Movie'
+                }
+            ]
         }
     ]
 });

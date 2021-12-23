@@ -2,6 +2,7 @@ import express from "express"
 import passport from "passport"
 import { Movie } from "../models/movies.js"
 import { User } from "../models/user.js";
+import { Board } from "../models/boards.js";
 
 const router = express.Router()
 router.post('/register', async (req, res) => {
@@ -27,15 +28,41 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 
 router.post('/profile', async (req, res) => {
     const userID = req.body.user_id;
-    const user = await User.findById(userID).populate({
-        path: 'pins'
-    });   
+    const user = await User.findById(userID).populate('pins')
+    user.populate('boards')
+ 
+    // console.log('**********************************')
+    // console.log('get profile')    
+    // console.log('**********************************')
+    // console.log(user)
     res.json(user)
 })
 
+router.post('/profile/getboard/', async (req, res) => {
+    const userID = req.body.user_id;
+    const user = await User.findById(userID)
+ 
+    // console.log('**********************************')
+    // console.log('get board')    
+    // console.log('**********************************')
+    // console.log(user.boards)
+    res.json(user.boards)
+})
+
 router.post('/profile/addboard/', async (req, res) => {
-    // find user by id and update
-    console.log('add board')        
+    const userID = req.body.userID;
+    const user = await User.findById(userID);
+    const board_data = {
+        'title': req.body.title,
+        'description': req.body.description
+    }
+
+    user.boards.push(board_data)
+    user.save()
+    
+    const board_id = (user.boards[user.boards.length - 1]._id).toString();
+   
+    res.json(board_id)
 })
 
 router.post('/profile/deleteboard/', async (req, res) => {
@@ -73,7 +100,7 @@ router.post('/profile/deletepin/', async (req, res) => {
     }
 
     user.save()
-
+    console.log(user)
     res.json({'pins': allPins, 'boards': user.boards})
 })
 
