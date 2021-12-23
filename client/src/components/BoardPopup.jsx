@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { ReactSession } from 'react-client-session';
+import { Navigate } from 'react-router-dom';
 
 export const BoardPopup = (props) => {
     const [boardname, setBoardName] = useState('');
     const [boarddescrip, setBoardDescrip] = useState('');
+    const [boardID, setBoardID] = useState('');
+    const [popupBool, setPopupBool] = useState(Boolean);
     const userid = ReactSession.get("userid");
 
     const handleSaveButton = () => { 
@@ -19,8 +22,20 @@ export const BoardPopup = (props) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         }).then((response) => {
-            console.log(response)
+            return response.json()
+        }).then((response) => { 
+            setBoardID(response)
+        }).then((response) => { 
+            setPopupBool(true)
         })
+    }
+
+    if (popupBool) { 
+        
+        return <Navigate push to={{
+            pathname: `/profile/${userid}/board/${boardID}`
+            }}
+        />
     }
 
     if (props.value) {

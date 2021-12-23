@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import movieFunctions from "../api/index.js";
 
 export const BoardsProfile = (props) => {
-    const userid = props.data
+    const userid = props.data;
+    const [boards, setBoards] = useState([]);
 
     useEffect(() => {
         movieFunctions
@@ -12,13 +13,23 @@ export const BoardsProfile = (props) => {
             return response.data
           })
           .then((response) => {
-           console.log('RESPONSE', response)
+            setBoards(response)
           })
-      }, []);
+    }, []);
+    
+    console.log(boards)
+    const allBoards = boards.map((i) => {
+        return (
+            <div className='board-contianer-profile'>
+                <h3>{ i.title }</h3>
+            </div>)
+      });
 
     return (
         <div>
-            <h1>Hi love!</h1>
+            <div>
+                {allBoards}
+            </div>
         </div>
     )
 }

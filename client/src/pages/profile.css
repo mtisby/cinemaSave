@@ -62,3 +62,11 @@ html{
     box-shadow: 0 0 50px rgba(80, 80, 80, 0.657);
     transform: translateY(-0.25em);
 }
+
+/*
+    boards
+*/
+.board-contianer-profile{
+    background-color: rgb(135, 135, 212);
+    width: 30vw;
+}
