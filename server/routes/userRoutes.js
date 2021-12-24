@@ -4,6 +4,10 @@ import { Movie } from "../models/movies.js"
 import { User } from "../models/user.js";
 import { Board } from "../models/boards.js";
 
+// debugging
+const debugLvl1 = true;
+
+
 const router = express.Router()
 router.post('/register', async (req, res) => {
     try {
@@ -104,15 +108,21 @@ router.post('/profile/addpin/', async (req, res) => {
 })
 
 router.post('/profile/deletepin/', async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('delete pin')
+        console.log('*******************************')
+    }
     const userID = req.body.userID;
-    const user = await User.findById(userID).populate({
-        path: 'pins'
-    });
+    const user = await User.findById(userID)
+    user.populate('pins')
+    user.populate('boards.pins')
+
     const movieID = req.body.movieID;
     let movie = await Movie.findById(movieID);
     
-    const allPins = user.pins
-    const boards = user.boards
+    let allPins = user.pins
+    let boards = user.boards
     
     for (var i = 0; i < allPins.length; i++) { 
         let string1 = allPins[i]._id.toString()
@@ -123,31 +133,28 @@ router.post('/profile/deletepin/', async (req, res) => {
         }
     }
 
-    console.log(req.body.boardID)
     if (req.body.boardID != undefined) { 
-        for (var i = 0; i < boards.length; i++) { 
-            if (boards[i]._id.toString() === req.body.boardID) {
-                let boardpins = boards[i].pins
+        Object.keys(user.boards).map(function (key) {
+            if(user.boards[key]._id.toString() === req.body.boardID){
+                const boardPins = user.boards[key].pins
+                boardPins.map(function (i){
+                    if(i._id.toString() === movieID){
+                        let index = boardPins.indexOf(i);
+                        boardPins.splice(index, 1);
+                        user.boards[key].pins = boardPins
+                        user.populate('boards.pins');
 
-                for (var i = 0; i < boardpins.length; i++) { 
-                    let string1 = boardpins[i]._id.toString()
-                    let string2 = movie._id.toString()
-            
-                    if (string1 === string2) { 
-                        boardpins.splice(i, 1);
+                        allPins = user.boards[key].pins;
+                        boards = user.boards[key];
+                        
                     }
-                }
-
-
+                })
             }
-        }
-
-        res.json({'pins': boardpins, 'boards': user.boards})
-
+        })
     }
 
     user.save()
-    res.json({'pins': allPins, 'boards': user.boards})
+    res.json({'pins': allPins, 'boards': boards})
 })
 
 const UserRoutes = router

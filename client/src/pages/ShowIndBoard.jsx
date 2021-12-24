@@ -30,17 +30,15 @@ function ShowIndBoard() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(props)
         })
-        //     .then((response) => {
-        //     console.log("removing?")
-        //     response = response.json()
-        //     return response
-        // }).then((data) => {
-        //     try {
-        //         console.log(data)
-        //     } catch (e) {
-        //         console.log(e)
-        //     }
-        // })
+        .then((response) => {
+            console.log("removing?")
+            response = response.json()
+            return response
+        }).then((data) => {
+            console.log(data)
+            setBoard(data.boards)
+            setPins(data.pins)
+        })
     }
 
     useEffect(() => {
