@@ -6,6 +6,7 @@ const movie_url = 'movie/'
 const home_url = 'home/'
 const profile_url = 'authentication/profile/'
 const board_url = 'getboard/'
+const board_id_url = 'getboard/id'
 
 const getAll = () => {
     return axios.get(url+home_url)
@@ -24,5 +25,9 @@ const getProfileBoards = (user_id) => {
     return axios.post(url+profile_url+board_url, {user_id})
 }
 
+const getProfileBoard = (user_id, board_id) => { 
+    return axios.post(url+profile_url+board_id_url, {user_id, board_id})
+}
 
-export default { getAll, getByID, getProfile, getProfileBoards}
+
+export default { getAll, getByID, getProfile, getProfileBoards, getProfileBoard}

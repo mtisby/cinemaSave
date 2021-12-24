@@ -40,13 +40,37 @@ router.post('/profile', async (req, res) => {
 
 router.post('/profile/getboard/', async (req, res) => {
     const userID = req.body.user_id;
+   
     const user = await User.findById(userID)
+    let sendUser = null
+
+    if(user.boards) { 
+        sendUser = user.boards
+    } 
  
     // console.log('**********************************')
     // console.log('get board')    
     // console.log('**********************************')
     // console.log(user.boards)
-    res.json(user.boards)
+    
+    res.json(sendUser)
+})
+
+router.post('/profile/getboard/id', async (req, res) => {
+    const boardID = req.body.board_id;
+    const userID = req.body.user_id;
+    const user = await User.findById(userID)
+
+    const boards = user.boards
+    let data = null
+
+    boards.map(function (i) {
+        if (i._id.toString() === boardID) {
+            data = i;
+        }
+    })
+    
+    res.json(data)
 })
 
 router.post('/profile/addboard/', async (req, res) => {

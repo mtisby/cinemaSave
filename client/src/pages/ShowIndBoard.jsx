@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import './profile.css';
 
 function ShowIndBoard() {
-    const userid = ReactSession.get("userid") ;
+    const userid = ReactSession.get("userid");
+    let boardID = window.location.pathname.split('/board/')[1];
     const [board, setBoard] = useState([]);
-    const [boardID, setBoardID] = useState('');
     const [pins, setPins] = useState([]);
 
     const handleButtonClick = (props) => {
@@ -23,58 +23,28 @@ function ShowIndBoard() {
         })
     }
       
-
-    // fetch('http://localhost:3060/authentication/profile/getboard/', {
-    //     method: 'POST',
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ 'user_id':userid })
-    // }).then((response) => {
-    //     setBoardID(window.location.pathname.split('/board/')[1])
-    //     return response.json()
-    // }).then((response) => {
-    //     try {
-    //         Object.keys(response).map(function (key) {
-    //             if (response[key]._id === boardID) {
-    //                 setBoard(response[key])
-    //                 setPins(response[key].pins)
-    //             }
-    //         })
-    //     } catch (error) { 
-    //         console.log(error)
-    //     }
-    // })
+    useEffect(() => {
+        console.log(boardID)
+        movieFunctions
+            .getProfileBoard(userid, boardID)
+            .then((response) => {
+                return response.data
+            })
+            .then((response) => {
+                setBoard(response)
+                setPins(response.pins)
+            })
+    }, []);
 
 
     const [movie, setMovies] = useState([]);
-
     useEffect(() => {
         movieFunctions
-        .getAll()
-        .then((response) => {
-            setMovies(response.data)
-        })
+            .getAll()
+            .then((response) => {
+                setMovies(response.data)
+            })
     }, []);
-
-
-    useEffect(() => {
-        movieFunctions
-        .getProfileBoards()
-        .then((response) => {
-            console.log(response)
-            // try {
-            //     Object.keys(response).map(function (key) {
-            //         if (response[key]._id === boardID) {
-            //             setBoard(response[key])
-            //             setPins(response[key].pins)
-            //         }
-            //     })
-            // } catch (error) { 
-            //     console.log(error)
-            // }
-        })
-    }, []);
-
-
     
     const allPins = Object.keys(movie).map(function (key) { 
         return (
@@ -91,17 +61,16 @@ function ShowIndBoard() {
     })
 
   return (
-      <div>
-          <Link to="/home">Home</Link> <br />
-          <Link to={`/profile/${userid}`}>Profile</Link>
+    <div>
+        <Link to="/home">Home</Link> <br />
+        <Link to={`/profile/${userid}`}>Profile</Link>
         <div className="showBoard">
-              <h1>{board.title} Board</h1>
-              <h3>{board.description}</h3>
-              <Pins pins={pins} />
-              <div className='movies-contianer'>
-                  { allPins }
-              </div>
-        
+            <h1>{board.title} Board</h1>
+            <h3>{board.description}</h3>
+            <Pins pins={pins} />
+            <div className='movies-contianer'>
+                { allPins }
+            </div>
         </div>
     </div>
   );
