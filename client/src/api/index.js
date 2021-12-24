@@ -17,8 +17,8 @@ const getByID = (movie_id) => {
     return axios.post(new_url, {id: movie_id})
 }
 
-const getProfile = (user_id) => { 
-    return axios.post(url+profile_url, {user_id})
+const getProfile = (user_id, board_id) => { 
+    return axios.post(url+profile_url, {user_id, board_id})
 }
 
 const getProfileBoards = (user_id) => { 

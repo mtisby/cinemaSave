@@ -11,7 +11,7 @@ function ShowIndBoard() {
     const [board, setBoard] = useState([]);
     const [pins, setPins] = useState([]);
 
-    const handleButtonClick = (props) => {
+    const handleSave = (props) => {
     
         fetch('http://localhost:3060/authentication/profile/addpin/', {
           method: 'POST',
@@ -20,6 +20,25 @@ function ShowIndBoard() {
         }).then((response) => {
           let req = response.json()
           return req
+        })
+    }
+
+    const handleRemove = (props) => {
+    
+        fetch('http://localhost:3060/authentication/profile/deletepin/', {
+          method: 'POST',
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(props)
+        }).then((response) => {
+            console.log("removing?")
+            response = response.json()
+            return response
+        }).then((data) => { 
+            try {
+                console.log(data)
+            } catch (e) { 
+                console.log(e)
+            }
         })
     }
       
@@ -46,7 +65,7 @@ function ShowIndBoard() {
             })
     }, []);
     
-    const allPins = Object.keys(movie).map(function (key) { 
+    const suggestedPins = Object.keys(movie).map(function (key) { 
         return (
        <div className='movie-contianer-profile'>
            <img src={movie[key].poster} alt={ `${movie[key].title} poster`} className='poster'/>
@@ -55,7 +74,22 @@ function ShowIndBoard() {
                 <h5>imdb: { movie[key].imdbRating } </h5>
                 <h5>genre(s): { movie[key].genre } </h5>
             </div>
-            <button className='save-btn' onClick={() => handleButtonClick({ 'movieID': movie[key]._id, 'userID': userid, 'boardID': boardID })}>save</button>
+            <button className='save-btn' onClick={() => handleSave({ 'movieID': movie[key]._id, 'userID': userid, 'boardID': boardID })}>save</button>
+       </div>
+        ) 
+    })
+
+    const boardPins = pins.map(function (movie) { 
+        console.log('movie', movie)
+        return (
+       <div className='movie-contianer-profile'>
+           <img src={movie.poster} alt={ `${movie.title} poster`} className='poster'/>
+            <div className='movie-descrip'>
+                <h3>{movie.title}</h3>
+                <h5>imdb: { movie.imdbRating } </h5>
+                <h5>genre(s): { movie.genre } </h5>
+            </div>
+            <button className='save-btn' onClick={() => handleRemove({ 'movieID': movie._id, 'userID': userid, 'boardID': boardID })}>remove</button>
        </div>
         ) 
     })
@@ -67,9 +101,9 @@ function ShowIndBoard() {
         <div className="showBoard">
             <h1>{board.title} Board</h1>
             <h3>{board.description}</h3>
-            <Pins pins={pins} />
+              <Pins pins={pins} component={ boardPins }/>
             <div className='movies-contianer'>
-                { allPins }
+                { suggestedPins }
             </div>
         </div>
     </div>
@@ -89,7 +123,7 @@ function Pins(props) {
         } else { 
             return (
                 <div>
-                    <p>mapping pins</p>
+                    {props.component}
                 </div>
             )
         }

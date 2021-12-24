@@ -6,7 +6,6 @@ import { Board } from "../models/boards.js";
 
 const router = express.Router()
 router.post('/register', async (req, res) => {
-    console.log(req.body)
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
@@ -30,11 +29,7 @@ router.post('/profile', async (req, res) => {
     const userID = req.body.user_id;
     const user = await User.findById(userID).populate('pins')
     user.populate('boards')
- 
-    // console.log('**********************************')
-    // console.log('get profile')    
-    // console.log('**********************************')
-    // console.log(user)
+
     res.json(user)
 })
 
@@ -47,11 +42,6 @@ router.post('/profile/getboard/', async (req, res) => {
     if(user.boards) { 
         sendUser = user.boards
     } 
- 
-    // console.log('**********************************')
-    // console.log('get board')    
-    // console.log('**********************************')
-    // console.log(user.boards)
     
     res.json(sendUser)
 })
@@ -59,7 +49,7 @@ router.post('/profile/getboard/', async (req, res) => {
 router.post('/profile/getboard/id', async (req, res) => {
     const boardID = req.body.board_id;
     const userID = req.body.user_id;
-    const user = await User.findById(userID)
+    const user = await User.findById(userID).populate('boards.pins')
 
     const boards = user.boards
     let data = null
@@ -97,8 +87,18 @@ router.post('/profile/deleteboard/', async (req, res) => {
 router.post('/profile/addpin/', async (req, res) => {
     const userID = req.body.userID;
     const movieID = req.body.movieID;
+    const movie = await Movie.findById(movieID);
     const user = await User.findById(userID);
+    const boards = user.boards;
     user.pins.push(movieID)
+
+    if (req.body.boardID) { 
+        boards.map(function (i) {
+            if (i._id.toString() === req.body.boardID) {
+                i.pins.push(movie);
+            }
+        })
+    }
 
     user.save()
 })
@@ -112,19 +112,41 @@ router.post('/profile/deletepin/', async (req, res) => {
     let movie = await Movie.findById(movieID);
     
     const allPins = user.pins
+    const boards = user.boards
     
     for (var i = 0; i < allPins.length; i++) { 
         let string1 = allPins[i]._id.toString()
         let string2 = movie._id.toString()
 
-        console.log(string2)
         if (string1 === string2) { 
             allPins.splice(i, 1);
         }
     }
 
+    console.log(req.body.boardID)
+    if (req.body.boardID != undefined) { 
+        for (var i = 0; i < boards.length; i++) { 
+            if (boards[i]._id.toString() === req.body.boardID) {
+                let boardpins = boards[i].pins
+
+                for (var i = 0; i < boardpins.length; i++) { 
+                    let string1 = boardpins[i]._id.toString()
+                    let string2 = movie._id.toString()
+            
+                    if (string1 === string2) { 
+                        boardpins.splice(i, 1);
+                    }
+                }
+
+
+            }
+        }
+
+        res.json({'pins': boardpins, 'boards': user.boards})
+
+    }
+
     user.save()
-    console.log(user)
     res.json({'pins': allPins, 'boards': user.boards})
 })
 
