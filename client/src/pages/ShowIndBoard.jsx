@@ -97,10 +97,15 @@ function ShowIndBoard() {
     <div>
         <Link to="/home">Home</Link> <br />
         <Link to={`/profile/${userid}`}>Profile</Link>
-        <div className="showBoard">
+          <div className="showBoard">
+            <div className='menu'>
+                <button>edit board</button>
+            </div>
+            
             <h1>{board.title} Board</h1>
             <h3>{board.description}</h3>
-              <Pins pins={pins} component={ boardPins }/>
+              
+            <Pins pins={pins} component={ boardPins }/>
             <div className='movies-contianer'>
                 { suggestedPins }
             </div>
