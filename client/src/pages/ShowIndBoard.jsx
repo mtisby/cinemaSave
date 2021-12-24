@@ -12,7 +12,7 @@ function ShowIndBoard() {
     const [pins, setPins] = useState([]);
 
     const handleSave = (props) => {
-    
+
         fetch('http://localhost:3060/authentication/profile/addpin/', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
@@ -24,24 +24,25 @@ function ShowIndBoard() {
     }
 
     const handleRemove = (props) => {
-    
+
         fetch('http://localhost:3060/authentication/profile/deletepin/', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(props)
-        }).then((response) => {
-            console.log("removing?")
-            response = response.json()
-            return response
-        }).then((data) => { 
-            try {
-                console.log(data)
-            } catch (e) { 
-                console.log(e)
-            }
         })
+        //     .then((response) => {
+        //     console.log("removing?")
+        //     response = response.json()
+        //     return response
+        // }).then((data) => {
+        //     try {
+        //         console.log(data)
+        //     } catch (e) {
+        //         console.log(e)
+        //     }
+        // })
     }
-      
+
     useEffect(() => {
         console.log(boardID)
         movieFunctions
@@ -64,8 +65,8 @@ function ShowIndBoard() {
                 setMovies(response.data)
             })
     }, []);
-    
-    const suggestedPins = Object.keys(movie).map(function (key) { 
+
+    const suggestedPins = Object.keys(movie).map(function (key) {
         return (
        <div className='movie-contianer-profile'>
            <img src={movie[key].poster} alt={ `${movie[key].title} poster`} className='poster'/>
@@ -76,10 +77,10 @@ function ShowIndBoard() {
             </div>
             <button className='save-btn' onClick={() => handleSave({ 'movieID': movie[key]._id, 'userID': userid, 'boardID': boardID })}>save</button>
        </div>
-        ) 
+        )
     })
 
-    const boardPins = pins.map(function (movie) { 
+    const boardPins = pins.map(function (movie) {
         console.log('movie', movie)
         return (
        <div className='movie-contianer-profile'>
@@ -91,7 +92,7 @@ function ShowIndBoard() {
             </div>
             <button className='save-btn' onClick={() => handleRemove({ 'movieID': movie._id, 'userID': userid, 'boardID': boardID })}>remove</button>
        </div>
-        ) 
+        )
     })
 
   return (
@@ -111,7 +112,7 @@ function ShowIndBoard() {
 }
 
 
-function Pins(props) { 
+function Pins(props) {
     const pins = props.pins
     {
         if (pins.length === 0) {
@@ -120,7 +121,7 @@ function Pins(props) {
                     <p>get started by adding pins to this board!</p>
                 </div>
             )
-        } else { 
+        } else {
             return (
                 <div>
                     {props.component}
