@@ -4,7 +4,7 @@ import { ReactSession } from 'react-client-session';
 export const EditBoardPopup = (props) => {
     const [boardname, setBoardName] = useState('');
     const [boarddescrip, setBoardDescrip] = useState('');
-    const [boardID, setBoardID] = useState('');
+    const boardID = window.location.pathname.split('/board/')[1];
     const userid = ReactSession.get("userid");
 
     let showPopup = props.value;
@@ -25,8 +25,6 @@ export const EditBoardPopup = (props) => {
                 body: JSON.stringify(data)
             }).then((response) => {
                 return response.json()
-            }).then((response) => { 
-                setBoardID(response)
             })
         }
 
@@ -36,14 +34,12 @@ export const EditBoardPopup = (props) => {
                 'boardID': boardID,
             }
     
-            fetch('http://localhost:3060/authentication/profile/editboard/', {
+            fetch('http://localhost:3060/authentication/profile/deleteboard/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             }).then((response) => {
                 return response.json()
-            }).then((response) => { 
-                setBoardID(response)
             })
         }
     

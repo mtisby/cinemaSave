@@ -117,14 +117,20 @@ router.post('/profile/deleteboard/', async (req, res) => {
     }       
 
     const userID = req.body.userID
-    const boardID = req.body.boardID;;
+    const boardID = req.body.boardID;
     const user = await User.findById(userID);
+    let x = 0
+
+
+    console.log('length before: ', user.boards.length)
 
     Object.keys(user.boards).map(function (key) {
-        if(user.boards[key]._id.toString() === boardID){
-            delete user.boards[key];
+        if (user.boards[key]._id.toString() === boardID) {
+           user.boards.splice(x, 1)
         }
+        x ++
     })
+    console.log('length after: ', user.boards.length)
 
     user.save()
 })
