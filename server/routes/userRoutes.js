@@ -83,9 +83,50 @@ router.post('/profile/addboard/', async (req, res) => {
     res.json(board_id)
 })
 
+router.post('/profile/editboard/', async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('edit board')
+        console.log('*******************************')
+    }
+
+    const userID = req.body.userID;
+    const boardID = req.body.boardID;
+    const board_title = req.body.title;
+    const board_descript = req.body.description;
+
+    const user = await User.findById(userID);
+    const boards = user.boards; 
+
+    Object.keys(user.boards).map(function (key) {
+        if(user.boards[key]._id.toString() === boardID){
+            user.boards[key].title = board_title;
+            user.boards[key].description = board_descript;
+        }
+    })
+
+    user.save();
+    res.json({'title': board_title, 'description': board_descript})
+})
+
 router.post('/profile/deleteboard/', async (req, res) => {
-    // find user by id and update
-    console.log('delete board')        
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('delete board')
+        console.log('*******************************')
+    }       
+
+    const userID = req.body.userID
+    const boardID = req.body.boardID;;
+    const user = await User.findById(userID);
+
+    Object.keys(user.boards).map(function (key) {
+        if(user.boards[key]._id.toString() === boardID){
+            delete user.boards[key];
+        }
+    })
+
+    user.save()
 })
 
 router.post('/profile/addpin/', async (req, res) => {

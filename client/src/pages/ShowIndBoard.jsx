@@ -2,6 +2,8 @@ import { ReactSession } from 'react-client-session';
 import React, { useEffect, useState } from 'react';
 import movieFunctions from "../api/index.js";
 import { Link } from 'react-router-dom';
+import { EditBoardPopup } from '../components/EditBoardPopup.jsx';
+
 // style sheets
 import './profile.css';
 
@@ -10,6 +12,7 @@ function ShowIndBoard() {
     let boardID = window.location.pathname.split('/board/')[1];
     const [board, setBoard] = useState([]);
     const [pins, setPins] = useState([]);
+    const [showPopup, setShowPopup] = useState(Boolean);
 
     const handleSave = (props) => {
 
@@ -39,6 +42,10 @@ function ShowIndBoard() {
             setBoard(data.boards)
             setPins(data.pins)
         })
+    }
+
+    const handleEdit = () => { 
+        setShowPopup(true)
     }
 
     useEffect(() => {
@@ -99,7 +106,8 @@ function ShowIndBoard() {
         <Link to={`/profile/${userid}`}>Profile</Link>
           <div className="showBoard">
             <div className='menu'>
-                <button>edit board</button>
+                <button onClick={handleEdit}>edit board</button>
+                  <EditBoardPopup value={ showPopup } data={ { 'userID': userid, 'boardID': boardID } }/>  
             </div>
             
             <h1>{board.title} Board</h1>
