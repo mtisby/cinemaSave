@@ -80,13 +80,16 @@ function Profile() {
             <div>
               <h3>Boards</h3>
             </div>
-            <div><button onClick={handleAddButton} >+</button></div>
+            <div><button className='addBtn' onClick={handleAddButton} >+</button></div>
           </div>
           <BoardsProfile data={ userid } />
           <BoardPopup value={ popupval } />
         </div>
-        <div className='movies-contianer'>
-          {allPins}
+        <div className='all-pins-profile'>
+          <h2>all pins</h2>
+          <div className='movies-contianer'>
+            {allPins}
+          </div>
         </div>
       </div>
       );

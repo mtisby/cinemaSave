@@ -1,10 +1,28 @@
 html{
     --off-white: #F0F0F0;
     --light-blue: #99AEB1;
+    --light-grey: #EFEFEF;
+    --dark-grey: #767676;
 }
 
 .hide{
     display: none;
+}
+
+/* profile */
+.addBtn{
+    background: none;
+    border: 2px solid white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.25em;
+    padding: .25em .5em;
+
+    transition: 1.5s;
+}
+
+.addBtn:hover{
+    background-color: var(--light-grey);
 }
 
 .movies-contianer{
@@ -16,8 +34,8 @@ html{
 }
 
 .movie-contianer-profile{
-    background-color: var(--off-white);
-    border: 1px solid var(--off-white);
+    background-color: white;
+    border: 1px solid white;
     border-radius: 2.5em;
 
     display: flex;
@@ -93,8 +111,8 @@ html{
 }
 
 .board-movies{
-    background-color: var(--light-blue);
-    border: 1px solid var(--light-blue);
+    background-color: var(--light-grey);
+    border: 1px solid var(--light-grey);
     border-radius: 2.5em;
 
     display: flex;

@@ -115,6 +115,7 @@ function ShowIndBoard() {
               
             <Pins pins={pins} component={ boardPins }/>
 
+            <h2>Here are some suggestions</h2>
             <div className='movies-contianer'>
                 { suggestedPins }
             </div>
