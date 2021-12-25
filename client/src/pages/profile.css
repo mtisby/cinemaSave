@@ -1,5 +1,6 @@
 html{
     --off-white: #F0F0F0;
+    --light-blue: #99AEB1;
 }
 
 .hide{
@@ -89,4 +90,27 @@ html{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.board-movies{
+    background-color: var(--light-blue);
+    border: 1px solid var(--light-blue);
+    border-radius: 2.5em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 1em;
+    width: 20em;
+
+    text-decoration: none;
+
+    transition: 1.5s;
+}
+
+.board-movies:hover{
+    box-shadow: 0 0 50px rgba(80, 80, 80, 0.657);
+    transform: translateY(-0.25em);
 }

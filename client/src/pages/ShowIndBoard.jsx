@@ -21,8 +21,9 @@ function ShowIndBoard() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(props)
         }).then((response) => {
-          let req = response.json()
-          return req
+            return response.json()
+        }).then((response) => {
+            setPins(response.pins)
         })
     }
 
@@ -85,10 +86,9 @@ function ShowIndBoard() {
         )
     })
 
-    const boardPins = pins.map(function (movie) {
-        console.log('movie', movie)
+    const boardPins = pins.slice(0).reverse().map(function (movie) {
         return (
-       <div className='movie-contianer-profile'>
+       <div className='board-movies'>
            <img src={movie.poster} alt={ `${movie.title} poster`} className='poster'/>
             <div className='movie-descrip'>
                 <h3>{movie.title}</h3>
@@ -114,6 +114,7 @@ function ShowIndBoard() {
             <h3>{board.description}</h3>
               
             <Pins pins={pins} component={ boardPins }/>
+
             <div className='movies-contianer'>
                 { suggestedPins }
             </div>
@@ -134,7 +135,7 @@ function Pins(props) {
             )
         } else {
             return (
-                <div>
+                <div className='boards-container'>
                     {props.component}
                 </div>
             )

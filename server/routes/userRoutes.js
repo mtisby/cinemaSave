@@ -136,22 +136,34 @@ router.post('/profile/deleteboard/', async (req, res) => {
 })
 
 router.post('/profile/addpin/', async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('add pin')
+        console.log('*******************************')
+    }
+
+    
     const userID = req.body.userID;
     const movieID = req.body.movieID;
     const movie = await Movie.findById(movieID);
-    const user = await User.findById(userID);
+    const user = await User.findById(userID).populate('boards.pins');
     const boards = user.boards;
     user.pins.push(movieID)
+
+    let dataSend = null
 
     if (req.body.boardID) { 
         boards.map(function (i) {
             if (i._id.toString() === req.body.boardID) {
                 i.pins.push(movie);
+                dataSend = i.pins
+                
             }
         })
     }
 
     user.save()
+    res.json({'pins':dataSend})
 })
 
 router.post('/profile/deletepin/', async (req, res) => {
