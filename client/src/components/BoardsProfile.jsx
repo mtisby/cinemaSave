@@ -7,6 +7,10 @@ export const BoardsProfile = (props) => {
     const userid = props.data;
     const [boards, setBoards] = useState([]);
 
+    const boardStyle = {
+        backgroundImage: 'url(' + images[0] + ')',
+    }
+
     useEffect(() => {
         movieFunctions
           .getProfileBoards(userid)
@@ -19,7 +23,6 @@ export const BoardsProfile = (props) => {
           })
     }, []);
     
-    console.log(boards)
     const allBoards = boards.map((i) => {
         let bkgImg = false;
         if (i.pins[0]){ 
@@ -28,7 +31,7 @@ export const BoardsProfile = (props) => {
         return (
             <div className='board-contianer-profile'>
                 <Link to={`/profile/${userid}/board/${i._id}`}>
-                    <div >
+                    <div style={boardStyle}>
                         <h3>{ i.title }</h3>
                     </div>
                 </Link>
