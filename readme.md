@@ -37,6 +37,7 @@ This activates MongoDB on your local device; however, note that cloning this rep
 <h5>Languages Used</h5>
 <ul>
     <li>JavaScript</li>
+    <li>Node.js</li>
     <li>CSS</li>
 </ul>
 
