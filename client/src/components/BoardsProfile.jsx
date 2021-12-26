@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import movieFunctions from "../api/index.js";
 import { Link } from 'react-router-dom';
+import {images} from '../scripts/image.js'
 
 export const BoardsProfile = (props) => {
     const userid = props.data;
@@ -20,10 +21,16 @@ export const BoardsProfile = (props) => {
     
     console.log(boards)
     const allBoards = boards.map((i) => {
+        let bkgImg = false;
+        if (i.pins[0]){ 
+            bkgImg = true
+        }
         return (
             <div className='board-contianer-profile'>
                 <Link to={`/profile/${userid}/board/${i._id}`}>
-                    <h3>{ i.title }</h3>
+                    <div >
+                        <h3>{ i.title }</h3>
+                    </div>
                 </Link>
             </div>)
       });
