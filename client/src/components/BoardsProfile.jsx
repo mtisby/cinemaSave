@@ -6,11 +6,6 @@ import {images} from '../scripts/image.js'
 export const BoardsProfile = (props) => {
     const userid = props.data;
     const [boards, setBoards] = useState([]);
-    const [bkImg, setBkgImg] = useState(Boolean);
-
-    const boardStyle = {
-        backgroundImage: 'url(' + images[0] + ')',
-    }
 
     useEffect(() => {
         movieFunctions
@@ -25,10 +20,13 @@ export const BoardsProfile = (props) => {
     }, []);
     
     const allBoards = boards.map((i) => {
-        if (i.pins[0]){ 
-            setBkgImg(true)
+        let bkImg = false;
+        console.log(i.pins[0])
+        if (i.pins[0].poster) { 
+            bkImg = true;
         }
 
+        console.log(bkImg)
         return (
             <div className='board-contianer-profile'>
                 <Link to={`/profile/${userid}/board/${i._id}`}>
