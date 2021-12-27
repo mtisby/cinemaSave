@@ -40,11 +40,12 @@ router.post('/profile', async (req, res) => {
 router.post('/profile/getboard/', async (req, res) => {
     const userID = req.body.user_id;
    
-    const user = await User.findById(userID).populate('boards.pins')
+    const user = await User.findById(userID)
     let sendUser = null
 
     if(user.boards) { 
-        sendUser = user.boards.populate('boards.pins')
+        sendUser = await user.populate('boards.pins')
+        console.log(sendUser.boards[0].pins)
     } 
     
     res.json(sendUser)
