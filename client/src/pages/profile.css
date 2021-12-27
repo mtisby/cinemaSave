@@ -97,8 +97,17 @@ html{
 }
 
 .board-contianer-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: 1.5em;
-    width: 30vw;
+}
+
+.board-contianer-bg{
+    background-size: contain;
+    width: 15vw;
+    height: 30vh;
 }
 
 .boards-container{

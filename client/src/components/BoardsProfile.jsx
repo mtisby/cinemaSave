@@ -31,10 +31,9 @@ export const BoardsProfile = (props) => {
         
         return (
             <div className='board-contianer-profile'>
+                <div className='board-contianer-bg' style={bkImg ? { backgroundImage: `url(${i.pins[0].poster})` } : { backgroundImage: `url(${images[0]})` }}></div>
                 <Link to={`/profile/${userid}/board/${i._id}`}>
-                    <div style={bkImg ? { backgroundImage: `url(${i.pins[0].poster})` } : { backgroundImage: `url(${images[0]})` }}>
-                        <h3>{ i.title }</h3>
-                    </div>
+                    <h3>{ i.title }</h3>
                 </Link>
             </div>)
       });
