@@ -3,6 +3,7 @@ html{
     --light-blue: #99AEB1;
     --light-grey: #EFEFEF;
     --dark-grey: #767676;
+    --coral: #F46262;
 }
 
 hr{
@@ -37,6 +38,8 @@ hr{
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1em;
+
+    color: black;
 }
 
 .navbar img{
@@ -69,6 +72,20 @@ hr{
     padding: .25em .5em;
 
     transition: 1.5s;
+}
+
+.removeBtn{
+    background-color: var(--coral);
+    border: 1px solid var(--coral);
+    border-radius: 2.5em;
+
+    font-size: .75em;
+    font-weight: bold;
+    color: white;
+
+    margin-bottom: 1em;
+    padding: .75em;
+
 }
 
 .addBtn:hover{

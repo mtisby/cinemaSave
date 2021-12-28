@@ -61,7 +61,7 @@ function Home() {
             <h5>imdb: { i.imdbRating } </h5>
             <h5>genre(s): { i.genre } </h5>
           </div>
-          <button className='save-btn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>save</button>
+          <div className='save-btn-container'><button className='save-btn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}></button></div>
         </div>)
   });
 

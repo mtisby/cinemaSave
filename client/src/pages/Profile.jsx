@@ -68,7 +68,7 @@ function Profile() {
             <h5>genre(s): { i.genre } </h5>
           </div>
         <br />
-        <button onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
+        <button className='removeBtn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
       </div>)
   });
 

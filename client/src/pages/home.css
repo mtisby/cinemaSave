@@ -22,8 +22,8 @@ html{
 }
 
 .movie-container{
-    background-color: var(--off-white);
-    border: 1px solid var(--off-white);
+    background-color: white;
+    border: 1px solid white;
     border-radius: 2.5em;
 
     display: flex;
@@ -52,11 +52,26 @@ html{
     margin: 0;
 }
 
+.save-btn-container{
+    background-image: url('https://res.cloudinary.com/dr0ofxgkz/image/upload/v1640659135/cinema-save/logo/Movie_Rater_vq22gf.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 4em;
+    height: 4em;
+}
+
 .save-btn{
     margin: 1em;
+    background-color: transparent;
+    border: none;
 }
 
 .movie-container:hover{
     box-shadow: 0 0 50px rgba(80, 80, 80, 0.657);
     transform: translateY(-0.25em);
+}
+
+.save-btn-container:hover{
+    cursor: pointer;
 }
