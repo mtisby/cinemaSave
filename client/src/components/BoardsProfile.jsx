@@ -24,14 +24,21 @@ export const BoardsProfile = (props) => {
     
     const allBoards = boards.map((i) => {
         let bkImg = false;
+        let imgsrc = null;
+        let imgalt = null;
         console.log('zoo tycoon', i.pins)
-        if (i.pins[0].poster != '') { 
-            bkImg = true;
+        if (i.pins[0].poster != '') {
+            imgsrc = i.pins[0].poster;
+            imgalt = i.pins.title
+        } else { 
+            let index = Math.floor(Math.random() * 6)
+            imgsrc = images[index];
+            imgalt = 'theater image';
         }
         
         return (
             <div className='board-contianer-profile'>
-                <div className='board-contianer-bg' style={bkImg ? { backgroundImage: `url(${i.pins[0].poster})` } : { backgroundImage: `url(${images[0]})` }}></div>
+                <img className="poster" src={ imgsrc } alt={ imgalt } />
                 <Link to={`/profile/${userid}/board/${i._id}`}>
                     <h3>{ i.title }</h3>
                 </Link>

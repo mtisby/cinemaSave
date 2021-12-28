@@ -2,8 +2,11 @@ html{
     --off-white: #F0F0F0;
 }
 
-.Home-Pg Link{
-    text-decoration: none;
+.Home-Pg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .hide{

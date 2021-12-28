@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { Route, Link} from 'react-router-dom';
 import movieFunctions from "../api/index.js"
 import { MovieSM } from '../components/MovieSM';
-import {ReactSession} from 'react-client-session';
+import { ReactSession } from 'react-client-session';
+import { Navbar } from '../components/Navbar.jsx';
 
 // style sheets
 import './home.css';
@@ -66,8 +67,8 @@ function Home() {
 
   return (
     <div className="Home-Pg">
-      <Link to={`/profile/${userid}`}>Profile</Link>
-      <h1>I am the Home Page</h1>
+      <Navbar />
+      <h1>Home Page</h1>
       <br />
       <div className='movies-contianer'>
         {movies}

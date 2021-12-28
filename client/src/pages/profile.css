@@ -5,11 +5,61 @@ html{
     --dark-grey: #767676;
 }
 
+hr{
+    border: .5px solid var(--light-grey);
+}
+
 .hide{
     display: none;
 }
 
+
+/* navbar */
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar div{
+    margin: 1em;
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-link{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.navbar img{
+    width: 3em;
+}
+
+.navbar input{
+    width: 60vw;
+    height: 4vh;
+
+    border: 1px solid var(--dark-grey);
+    border-radius: 2.5em;
+}
 /* profile */
+.header{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+}
+
 .addBtn{
     background: none;
     border: 2px solid white;
@@ -54,6 +104,7 @@ html{
 .poster{
     margin-top: 2em;
     width: 15em;
+    border-radius: 2em;
 }
 
 .movie-descrip{
@@ -104,10 +155,8 @@ html{
     margin: 1.5em;
 }
 
-.board-contianer-bg{
-    background-size: contain;
-    width: 15vw;
-    height: 30vh;
+.board-contianer-profile .poster{
+    border-radius: 2em;
 }
 
 .boards-container{

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import movieFunctions from "../api/index.js";
 import { BoardPopup } from '../components/BoardPopup.jsx';
 import { BoardsProfile } from '../components/BoardsProfile';
+import { Navbar } from '../components/Navbar.jsx';
 
 // style sheets
 import './profile.css';
@@ -73,8 +74,10 @@ function Profile() {
 
     return (
       <div className="profile">
-        <Link to="/home">home</Link>
-        <h1>Welcome {ReactSession.get("username")}</h1>
+        <Navbar />
+        <div className='header'>
+          <h1>Welcome {ReactSession.get("username")}</h1>
+        </div>
         <div>
           <div className='boards-header'>
             <div>
@@ -85,6 +88,7 @@ function Profile() {
           <BoardsProfile data={ userid } />
           <BoardPopup value={ popupval } />
         </div>
+        <hr />
         <div className='all-pins-profile'>
           <h2>all pins</h2>
           <div className='movies-contianer'>
