@@ -10,7 +10,7 @@ import { Navbar } from '../components/Navbar.jsx';
 import './profile.css';
 
 function Profile() {
-  let userid = ReactSession.get("userid") 
+  let userid = ReactSession.get("userid")
   const [pins, setPins] = useState([]);
   const [boards, setBoards] = useState([]);
   const [popupval, setPopupVal] = useState(Boolean);
@@ -26,13 +26,13 @@ function Profile() {
         try {
           setPins(response.pins)
           setBoards(response.boards)
-        } catch (e) { 
+        } catch (e) {
           console.log(e)
         }
       })
   }, []);
 
-  const handleShareButton = () => { 
+  const handleShareButton = () => {
     const userProfileLink = document.getElementById("userProfileLink")
     userProfileLink.select();
     navigator.clipboard.writeText(userProfileLink.value);
@@ -47,17 +47,17 @@ function Profile() {
     }).then((response) => {
       response = response.json()
       return response
-    }).then((data) => { 
+    }).then((data) => {
       try {
         setPins(data.pins)
         setBoards(data.boards)
-      } catch (e) { 
+      } catch (e) {
         console.log(e)
       }
     })
   }
 
-  const handleAddButton = () => { 
+  const handleAddButton = () => {
     setPopupVal(true)
   }
 
@@ -65,17 +65,17 @@ function Profile() {
   console.log('boards', boards)
 
   const allPins = pins.slice(0).reverse().map((i) => {
-    return (
-      <div className='movie-contianer-profile'>
-         <img src={i.poster} alt={ `${i.title} poster`} className='poster'/>
+      return (
+        <div className='movie-contianer-profile'>
+          <img src={i.poster} alt={`${i.title} poster`} className='poster' />
           <div className='movie-descrip'>
             <h3>{i.title}</h3>
-            <h5>imdb: { i.imdbRating } </h5>
-            <h5>genre(s): { i.genre } </h5>
+            <h5>imdb: {i.imdbRating} </h5>
+            <h5>genre(s): {i.genre} </h5>
           </div>
-        <br />
-        <button className='removeBtn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
-      </div>)
+          <br />
+          <button className='removeBtn' onClick={() => handleButtonClick({ 'movieID': i._id, 'userID': userid })}>remove</button>
+        </div>)
   });
 
     return (
@@ -103,7 +103,7 @@ function Profile() {
         <div className='all-pins-profile'>
           <h2>all pins</h2>
           <div className='movies-contianer'>
-            {allPins}
+              {allPins}
           </div>
         </div>
       </div>

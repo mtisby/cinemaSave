@@ -22,10 +22,14 @@ function Register() {
             let req = response.json()
             return req
         }).then((req) => {
-            if (req === 'success') {
-                setRegister(true);
-                setID(req);
-            }
+            console.log(typeof req)
+            setID(req);
+            // if (req != undefined) {
+            //     setID(req);
+            //     console.log(id)
+            // }
+        }).then((req) => {
+            setRegister(true);
         })
     }
   
