@@ -32,6 +32,12 @@ function Profile() {
       })
   }, []);
 
+  const handleShareButton = () => { 
+    const userProfileLink = document.getElementById("userProfileLink")
+    userProfileLink.select();
+    navigator.clipboard.writeText(userProfileLink.value);
+  }
+
   const handleButtonClick = (props) => {
     
     fetch('http://localhost:3060/authentication/profile/deletepin/', {
@@ -76,7 +82,12 @@ function Profile() {
       <div className="profile">
         <Navbar />
         <div className='header'>
-          <h1>Welcome {ReactSession.get("username")}</h1>
+          <input id="userProfileLink" value={window.location.href} type="text" hidden />
+          <img className='profile-img' src="https://res.cloudinary.com/dr0ofxgkz/image/upload/v1640501510/cinema-save/theater-img_w5f8yz.jpg" alt="profile-pic" />
+          <div className='share'>
+            <h1>{ReactSession.get("username")}</h1>
+            <img onClick={handleShareButton} src="https://res.cloudinary.com/dr0ofxgkz/image/upload/v1640736464/cinema-save/logo/share_lre6s2.png" alt="share-logo" />
+          </div>
         </div>
         <div>
           <div className='boards-header'>
