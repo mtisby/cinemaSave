@@ -11,6 +11,7 @@ import './home.css';
 
 const handleClick = (props) => {
   const id = props;
+  let userid = ReactSession.get("userid")
     
   fetch('http://localhost:3060/movie/id', {
     method: 'POST',
@@ -43,7 +44,7 @@ function Home() {
 
   useEffect(() => {
     movieFunctions
-      .getAll()
+      .getAll(userid)
       .then((response) => {
         console.log('promise fulfilled')
         console.log(response)

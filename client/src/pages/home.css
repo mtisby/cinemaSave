@@ -63,6 +63,8 @@ html{
 
 .save-btn{
     margin: 1em;
+    width: 5em;
+    height: 3em;
     background-color: transparent;
     border: none;
 }

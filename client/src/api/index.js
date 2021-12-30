@@ -8,8 +8,8 @@ const profile_url = 'authentication/profile/'
 const board_url = 'getboard/'
 const board_id_url = 'getboard/id'
 
-const getAll = () => {
-    return axios.get(url+home_url)
+const getAll = (user_id) => {
+    return axios.post(url+home_url, {userid: user_id})
 }
 
 const getByID = (movie_id) => {

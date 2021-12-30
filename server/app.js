@@ -35,6 +35,10 @@ import { User } from './models/user.js'
 import MongoStore from "connect-mongo"
 import mongoSanitize from "express-mongo-sanitize"
 
+
+let debugLvl1 = true;
+
+
 const dbUrl = 'mongodb://localhost:27017/cinema-save';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -111,7 +115,71 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get("/home", cors(), isLoggedIn, async (req, res) => {
+app.post("/home", cors(), isLoggedIn, async (req, res) => {
+    let userID = req.body.userid
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('home board')
+        console.log('*******************************')
+
+        console.log('req.body: ', req.body)
+    }
+
+    let user = await User.findById(userID).populate('pins');
+    let userPins = user.pins;
+    
+    let topGenresArr = user.topGenres;
+    if(debugLvl1 === true){
+        console.log('topGenres: ', user.topGenres.length)
+    }
+
+    // if (topGenresArr.length < 1) {
+        console.log('********************less********************')
+        let topGenresObj = {};
+        for (var pin of userPins) {
+            let topGenreKeys = Object.keys(topGenresObj)
+            let genres = pin.genre.split(",")
+            for (var genre of genres) {
+                genre = genre.toString().trim()
+                if (topGenreKeys.includes(genre) === false) {
+                    topGenresObj[genre] = 1
+                } else {
+                    let value = parseInt(topGenresObj[genre])
+                    topGenresObj[genre] = value + 1
+                }
+            }
+        }
+
+        user.topGenres.pop()
+        user.topGenres.push(topGenresObj);
+        console.log(topGenresObj)
+    // } else { 
+    //     console.log(console.log('********************more********************'))
+    //     let topGenresObj = user.topGenres[0];
+    //     for (var pin of userPins) {
+    //         let topGenreKeys = Object.keys(topGenresObj)
+    //         let genres = pin.genre.split(",")
+    //         for (var genre of genres) {
+    //             genre = genre.toString().trim()
+    //             if (topGenreKeys.includes(genre) === false) {
+    //                 topGenresObj[genre] = 1
+    //             } else {
+    //                 let value = parseInt(topGenresObj[genre])
+    //                 topGenresObj[genre] = value + 1
+    //             }
+    //         }
+    //     }
+
+    //     user.topGenres.pop()
+    //     user.topGenres.push(topGenresObj);
+    //     console.log(topGenresObj)
+    // }
+
+    // user.data.topGenres = topGenresArr;
+    user.save();
+
+    console.log('babes are we saved or nah?')
+
     const allMovies = await Movie.find({});
     res.json(allMovies)
 })

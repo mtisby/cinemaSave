@@ -9,6 +9,10 @@ const UserSchema = new Schema({
         required: true,
         unique: true
     },
+    topGenres: {
+        type: Array,
+        required: true
+    },
     pins: [
         {
             type: Schema.Types.ObjectId,

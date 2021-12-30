@@ -66,7 +66,7 @@ function ShowIndBoard() {
     const [movie, setMovies] = useState([]);
     useEffect(() => {
         movieFunctions
-            .getAll()
+            .getAll(userid)
             .then((response) => {
                 setMovies(response.data)
             })
