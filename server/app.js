@@ -133,52 +133,26 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
         console.log('topGenres: ', user.topGenres.length)
     }
 
-    // if (topGenresArr.length < 1) {
-        console.log('********************less********************')
-        let topGenresObj = {};
-        for (var pin of userPins) {
-            let topGenreKeys = Object.keys(topGenresObj)
-            let genres = pin.genre.split(",")
-            for (var genre of genres) {
-                genre = genre.toString().trim()
-                if (topGenreKeys.includes(genre) === false) {
-                    topGenresObj[genre] = 1
-                } else {
-                    let value = parseInt(topGenresObj[genre])
-                    topGenresObj[genre] = value + 1
-                }
+    let topGenresObj = {};
+    for (var pin of userPins) {
+        let topGenreKeys = Object.keys(topGenresObj)
+        let genres = pin.genre.split(",")
+        for (var genre of genres) {
+            genre = genre.toString().trim()
+            if (topGenreKeys.includes(genre) === false) {
+                topGenresObj[genre] = 1
+            } else {
+                let value = parseInt(topGenresObj[genre])
+                topGenresObj[genre] = value + 1
             }
         }
+    }
 
-        user.topGenres.pop()
-        user.topGenres.push(topGenresObj);
-        console.log(topGenresObj)
-    // } else { 
-    //     console.log(console.log('********************more********************'))
-    //     let topGenresObj = user.topGenres[0];
-    //     for (var pin of userPins) {
-    //         let topGenreKeys = Object.keys(topGenresObj)
-    //         let genres = pin.genre.split(",")
-    //         for (var genre of genres) {
-    //             genre = genre.toString().trim()
-    //             if (topGenreKeys.includes(genre) === false) {
-    //                 topGenresObj[genre] = 1
-    //             } else {
-    //                 let value = parseInt(topGenresObj[genre])
-    //                 topGenresObj[genre] = value + 1
-    //             }
-    //         }
-    //     }
+    user.topGenres.pop()
+    user.topGenres.push(topGenresObj);
+    console.log(topGenresObj)
 
-    //     user.topGenres.pop()
-    //     user.topGenres.push(topGenresObj);
-    //     console.log(topGenresObj)
-    // }
-
-    // user.data.topGenres = topGenresArr;
     user.save();
-
-    console.log('babes are we saved or nah?')
 
     const allMovies = await Movie.find({});
     res.json(allMovies)
