@@ -12,9 +12,9 @@ const getAll = (user_id) => {
     return axios.post(url+home_url, {userid: user_id})
 }
 
-const getByID = (movie_id) => {
+const getByID = (movie_id, user_id) => {
     let new_url = url + movie_url + movie_id
-    return axios.post(new_url, {id: movie_id})
+    return axios.post(new_url, {movie_id, user_id})
 }
 
 const getProfile = (user_id, board_id) => { 

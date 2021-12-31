@@ -1,4 +1,4 @@
-const findTopGenres = (user) => {
+const findTopGenres = (user, routeName) => {
     const userPins = user.pins;
     let topGenresObj = {};
 
@@ -53,7 +53,6 @@ const findTopGenres = (user) => {
     })
 
     let criteria = [{ 'genre': { $regex: top1Key, $options: 'i' } }, { 'genre': { $regex: top2Key, $options: 'i' } }, { 'genre': { $regex: top3Key, $options: 'i' } }]
-
     return criteria
 }
  

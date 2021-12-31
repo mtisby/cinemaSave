@@ -126,7 +126,8 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
 
     let user = await User.findById(userID).populate('pins');
     let userPins = user.pins;
-    let mongoCriteria = findTopGenres(user);
+    let routeName = "/home"
+    let mongoCriteria = findTopGenres(user, routeName);
     
     let allGenresMovies = [];
 

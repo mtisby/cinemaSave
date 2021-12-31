@@ -7,11 +7,15 @@ import { ReactSession } from 'react-client-session';
 import './moviesm.css';
 
 export const MovieSM = (props) => {
+    const userid = ReactSession.get("userid");
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
       useEffect(() => {
         movieFunctions
-          .getByID(id)
+          .getByID({
+            'movie_id': id,
+            'user_id': userid
+          })
           .then((response) => {
               console.log('promise fulfilled')
               let req = response.data
@@ -40,6 +44,7 @@ export const MovieSM = (props) => {
       //   }
       // })
   }
+
   let genres = movie.genre + ''
   genres = genres.split(',')
  
@@ -55,7 +60,7 @@ export const MovieSM = (props) => {
         <div className="movie-container-row">
           <div className="div-left">
             <img className="poster" src={movie.poster} alt={`${movie.title} poster`} />
-            <button onClick={() => handleButtonClick({ 'movieID': movie._id, 'userID': ReactSession.get("userid") })}>save</button>
+            <button onClick={() => handleButtonClick({ 'movieID': movie._id, 'userID': userid })}>save</button>
           </div>
           <div className="movie-desrip-show">
             <h1>{movie.title}</h1>
