@@ -1,0 +1,45 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    position: fixed;
+    top: 0px;
+
+    background-color: white;
+    z-index: 5;
+}
+
+.navbar div{
+    margin: 1em;
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-link{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+
+    color: black;
+}
+
+.navbar img{
+    width: 3em;
+}
+
+.navbar input{
+    width: 60vw;
+    height: 4vh;
+
+    border: 1px solid var(--dark-grey);
+    border-radius: 2.5em;
+}

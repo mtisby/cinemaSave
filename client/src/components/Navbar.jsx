@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
+// style sheets
+import './navbar.css';
 
 export const Navbar = () => {
     const userid = ReactSession.get("userid");
