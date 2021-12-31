@@ -149,7 +149,6 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
 
     user.topGenres.pop()
     user.topGenres.push(topGenresObj);
-    console.log(topGenresObj)
 
     user.save();
 
@@ -163,7 +162,6 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
     let topGenreKeys = Object.keys(topGenresObj)
     topGenreKeys.map((genre) => { 
         let value = topGenresObj[genre]
-        console.log(value)
 
         if (top1Value === null || value > top1Value){
             top3Value = top2Value
@@ -196,8 +194,6 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
         allGenresMovies.push(movieByGenres);
     }    
     
-    console.log('length? ', allGenresMovies[0].length)
-    //console.log("ELLO LOVE", userPins)
     let allMovies = []
     for (var i = 0; i < allGenresMovies.length; i++) { 
         for (var j = 0; j < allGenresMovies[i].length; j++) { 
