@@ -128,7 +128,6 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
     let user = await User.findById(userID).populate('pins');
     let userPins = user.pins;
     
-    let topGenresArr = user.topGenres;
     if(debugLvl1 === true){
         console.log('topGenres: ', user.topGenres.length)
     }
@@ -154,7 +153,72 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
 
     user.save();
 
-    const allMovies = await Movie.find({});
+    let top1Value = null;
+    let top2Value = null;
+    let top3Value = null; 
+    let top1Key = null;
+    let top2Key = null;
+    let top3Key = null; 
+
+    let topGenreKeys = Object.keys(topGenresObj)
+    topGenreKeys.map((genre) => { 
+        let value = topGenresObj[genre]
+        console.log(value)
+
+        if (top1Value === null || value > top1Value){
+            top3Value = top2Value
+            top3Key = top2Key
+            top2Value = top1Value
+            top2Key = top1Key
+            top1Value = value
+            top1Key = genre
+        } else if (top2Value === null || value > top2Value){
+            top3Value = top2Value
+            top3Key = top2Key
+            top2Value = value
+            top2Key = genre
+        } else if (top3Value === null || value > top3Value){
+            top3Value = value
+            top3Key = genre
+        }
+
+
+    })
+
+    /*
+        find movies with the top genres
+    */
+    let criteria = [{ 'genre': { $regex: top1Key, $options: 'i' } }, { 'genre': { $regex: top2Key, $options: 'i' } }, { 'genre': { $regex: top3Key, $options: 'i' } }]
+    let allGenresMovies = [];
+
+    for (var i = 0; i < criteria.length; i++) { 
+        let movieByGenres = await Movie.find(criteria[i]);
+        allGenresMovies.push(movieByGenres);
+    }    
+    
+    console.log('length? ', allGenresMovies[0].length)
+    //console.log("ELLO LOVE", userPins)
+    let allMovies = []
+    for (var i = 0; i < allGenresMovies.length; i++) { 
+        for (var j = 0; j < allGenresMovies[i].length; j++) { 
+            let included = false;
+
+            for (var k = 0; k < userPins.length; k++) { 
+                if (userPins[k].title === allGenresMovies[i][j].title) { 
+                    included = true;
+                }
+            }
+
+            if (included === false) {
+                allMovies.push(allGenresMovies[i][j])
+            }
+        }
+    }   
+    /* add another key value pair in data for production company
+        help with algo for reccomendations
+    */
+
+    // const allMovies = await Movie.find({ });
     res.json(allMovies)
 })
 
