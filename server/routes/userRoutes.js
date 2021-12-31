@@ -1,10 +1,6 @@
 import express from "express"
 import passport from "passport";
-import { register, login, getProfile, getBoard, getBoardID, addBoard, editBoard, deleteBoard, addPin, deletePins} from '../controllers/movies.js'
-
-// debugging
-const debugLvl1 = true;
-
+import { register, login, getProfile, getBoard, getBoardID, addBoard, editBoard, deleteBoard, addPin, deletePins } from '../controllers/movies.js';
 
 const router = express.Router()
 router.route('/register')

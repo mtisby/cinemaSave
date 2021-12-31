@@ -1,5 +1,3 @@
-import { Movie } from "../models/movies.js";
-
 const findTopGenres = (user) => {
     const userPins = user.pins;
     let topGenresObj = {};

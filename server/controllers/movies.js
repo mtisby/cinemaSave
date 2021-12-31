@@ -1,7 +1,16 @@
 import { User } from "../models/user.js";
 import { Movie } from "../models/movies.js";
 
+// debugging
+const debugLvl1 = true;
+
 const register = async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('register')
+        console.log('*******************************')
+    }
+
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
@@ -18,10 +27,21 @@ const register = async (req, res) => {
 };
 
 const login = (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('login')
+        console.log('*******************************')
+    }
     res.json({'user_id':req.user._id, 'username':req.user.username})
 }
 
 const getProfile = async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('get profile')
+        console.log('*******************************')
+    }
+
     const userID = req.body.user_id;
     const user = await User.findById(userID).populate('pins')
     user.populate('boards')
@@ -30,6 +50,11 @@ const getProfile = async (req, res) => {
 }
 
 const getBoard = async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('get board')
+        console.log('*******************************')
+    }
     const userID = req.body.user_id;
    
     const user = await User.findById(userID)
@@ -43,6 +68,12 @@ const getBoard = async (req, res) => {
 }
 
 const getBoardID = async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('get board id')
+        console.log('*******************************')
+    }
+
     const boardID = req.body.board_id;
     const userID = req.body.user_id;
     const user = await User.findById(userID).populate('boards.pins')
@@ -60,6 +91,12 @@ const getBoardID = async (req, res) => {
 }
 
 const addBoard = async (req, res) => {
+    if(debugLvl1 === true){
+        console.log('*******************************')
+        console.log('add board')
+        console.log('*******************************')
+    }
+
     const userID = req.body.userID;
     const user = await User.findById(userID);
     const board_data = {
