@@ -79,7 +79,7 @@ function Profile() {
   });
 
     return (
-      <div className="profile">
+      <div className="profile pgMargin">
         <Navbar />
         <div className='header'>
           <input id="userProfileLink" value={window.location.href} type="text" hidden />
