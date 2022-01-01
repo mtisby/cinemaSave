@@ -62,18 +62,20 @@ This activates MongoDB on your local device; however, note that cloning this rep
     <li>passport</li>
 </ul>
 
+<h5>APIs Used</h5>
+<ul>
+    <li><a href="https://imdb-api.com/">IMDb API</a></li>
+    <li><a href="http://www.omdbapi.com/">OMDb API</a></li>
+    <li><a href="https://api.watchmode.com/">WatchMode API</a></li>
+</ul>
+
 ## 🧠 Challenges we ran into
-<p> One of the challenges I had to overcome was ...</p> 
+<p> One of the challenges I had to overcome was finding which combination of APIs gave me enough data. I was looking for certain parameteres that not every API provided.</p> 
 
 ## 🏅 Accomplishments that we're proud of
 <ul>
-    <li></li>
-    <li></li>
-    <li></li>
+    <li>the recommendation algorithm</li>
 </ul>
-
-## 🔜 What's next?
-<p>Up next ...</p>
 
 ## ✨ Contact Me
 <h3>The Engineer:</h3>
