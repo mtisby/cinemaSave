@@ -69,7 +69,7 @@ This activates MongoDB on your local device; however, note that cloning this rep
     <li><a href="https://api.watchmode.com/">WatchMode API</a></li>
 </ul>
 
-## 🧠 Challenges we ran into
+## 🧠 Challenges I ran into
 <p> One of the challenges I had to overcome was finding which combination of APIs gave me enough data. I was looking for certain parameteres that not every API provided.</p> 
 
 ## 🏅 Accomplishments that we're proud of
