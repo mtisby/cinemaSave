@@ -135,3 +135,14 @@ fs.createReadStream(watchmode_csvfile)
                 console.log('oops', e)
             })
     });
+
+
+//     const fetch = require('node-fetch');
+
+// let url = 'https://api.watchmode.com/v1/title/345534/sources/?apiKey=YOUR_API_KEY';
+
+// fetch(url, { method: 'Get' })
+//     .then((res) => res.json())
+//     .then((json) => {
+//         console.log(json);
+//     });
