@@ -20,10 +20,10 @@ router.post('/:id', isLoggedIn, async (req, res) => {
             const movie = await Movie.findById(movie_id)
             res.json(movie)
         }  catch (e) { 
-            console.log(e)
+            console.log('error')
         }
     } catch (e) { 
-        console.log(e)
+        console.log('error')
     }
 })
 

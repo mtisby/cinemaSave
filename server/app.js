@@ -12,6 +12,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { findTopGenres } from './algos/recommendation.js'
+import { shuffle } from './algos/shuffle.js'
 
 import session from "express-session"
 import cookieParser from "cookie-parser";
@@ -152,6 +153,8 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
             }
         }
     }
+
+    allMovies = shuffle(allMovies)
 
     res.json(allMovies)
 })

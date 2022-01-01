@@ -9,7 +9,7 @@ import { Navbar } from '../components/Navbar.jsx';
 // style sheets
 import './home.css';
 
-const handleClick = (props) => {
+const handleMovieID = (props) => {
   const id = props;
   let userid = ReactSession.get("userid")
     
@@ -56,7 +56,7 @@ function Home() {
   const movies = movie.map((i) => {
     return (
         <div className='movie-container'>
-          <Link to={`/movie/${i._id}`} onClick={() => handleClick(i._id)} style={{ textDecoration: 'none', color:'black'}}><img src={i.poster} alt={ `${i.title} poster`} className='poster'/></Link>
+          <Link to={`/movie/${i._id}`} onClick={() => handleMovieID(i._id)} style={{ textDecoration: 'none', color:'black'}}><img src={i.poster} alt={ `${i.title} poster`} className='poster'/></Link>
           <div className='movie-descrip'>
             <h3>{i.title}</h3>
             <h5>imdb: { i.imdbRating } </h5>

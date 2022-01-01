@@ -28,21 +28,17 @@ export const MovieSM = (props) => {
       }, []);
 
     const handleButtonClick = (e) => {
-      // fetch('http://localhost:3060/authentication/profile/deletepin/', {
-      //   method: 'POST',
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(props)
-      // }).then((response) => {
-      //   response = response.json()
-      //   return response
-      // }).then((data) => { 
-      //   try {
-      //     setPins(data.pins)
-      //     setBoards(data.boards)
-      //   } catch (e) { 
-      //     console.log(e)
-      //   }
-      // })
+      fetch('http://localhost:3060/authentication/profile/addpin/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          'movie_id': id,
+          'user_id': userid
+        })
+      }).then((response) => {
+        let req = response.json()
+        return req
+      })
   }
 
   let genres = movie.genre + ''
