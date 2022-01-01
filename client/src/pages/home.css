@@ -2,6 +2,10 @@ html{
     --off-white: #F0F0F0;
 }
 
+.pgMargin{
+    margin-top: 7em;
+}
+
 .Home-Pg{
     display: flex;
     flex-direction: column;

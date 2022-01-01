@@ -1,14 +1,18 @@
 import { MovieSM } from '../components/MovieSM'; 
+import { Navbar } from '../components/Navbar';
+import { PinReccomendations } from '../components/PinReccomendations.jsx';
 import { ReactSession } from 'react-client-session';
-import { Link } from 'react-router-dom';
+
 
 function ShowMovie() {
+  const userid = ReactSession.get("userid");
 
     return (
-        <div className="showMovie">
-          <Link to="/home">home</Link>
+      <div className="showMovie pgMargin">
+          <Navbar />
           <MovieSM />
-          <p>hello? { ReactSession.get("username") }</p>
+          <hr />
+          <PinReccomendations userid= { userid } />
         </div>
       );
 }
