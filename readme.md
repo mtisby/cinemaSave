@@ -74,7 +74,7 @@ This activates MongoDB on your local device; however, note that cloning this rep
 
 ## 🏅 Accomplishments that we're proud of
 <ul>
-    <li>the recommendation algorithm</li>
+    <li>the recommendation algorithm for new movies</li>
 </ul>
 
 ## ✨ Contact Me
