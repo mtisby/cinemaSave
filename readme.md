@@ -3,7 +3,7 @@
 <p>This project is a web app made to  <a href="#">here</a></p>
 
 ## 💻 What it does
-<p>*Catchy name* is a Pinterest-style web app which allows users organize movies into boards, find similar movies, and get a movie recommendation based on a specified genre and streaming platform</p>
+<p>Cinema Save is a Pinterest-style web app which allows users organize movies into boards, find similar movies, and get a movie recommendation based on a specified genre and streaming platform</p>
 
 <ul>
     <li>Login or Register</li>
@@ -74,7 +74,7 @@ This activates MongoDB on your local device; however, note that cloning this rep
 
 ## 🏅 Accomplishments that we're proud of
 <ul>
-    <li>the recommendation algorithm for new movies</li>
+    <li>the recommendation algorithm for new movies!</li>
 </ul>
 
 ## ✨ Contact Me
