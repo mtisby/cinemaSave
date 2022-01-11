@@ -39,6 +39,8 @@ export const PinReccomendations = (props) => {
 
     const userid = props.userid;
     const [movie, setMovies] = useState([]);
+    const [moveieSubset, setMovieSubset] = useState([]);
+    const [subsetSlice, setSubsetSlice] = useState(Number);
   
     useEffect(() => {
       movieFunctions
@@ -47,10 +49,21 @@ export const PinReccomendations = (props) => {
           console.log('promise fulfilled')
           console.log(response)
           setMovies(response.data)
+          setMovieSubset(response.data.splice(0, 50));
+          setSubsetSlice(50);
         })
     }, []);
 
-    const movies = movie.map((i) => {
+    const handleLoadMore = () =>{
+      console.log(moveieSubset.length)
+      let newSubset = subsetSlice + 50;
+      console.log('new subset', newSubset)
+      let newMovies = movie.slice(subsetSlice, newSubset) 
+      setSubsetSlice(newSubset)
+      setMovieSubset(newMovies)
+    }
+
+    const movies = moveieSubset.map((i) => {
         return (
             <div className='movie-container'>
                 <Link to={`/movie/${i._id}`} onClick={() => handleMovieID(i._id)} style={{ textDecoration: 'none', color:'black'}}><img src={i.poster} alt={ `${i.title} poster`} className='poster'/></Link>
@@ -64,8 +77,12 @@ export const PinReccomendations = (props) => {
     });
     
     return (
-        <div className='movies-contianer'>
-            { movies }
+        <div className='pinrec'>
+          <div className='movies-contianer'>
+              { movies }
+          </div>
+
+          <button onClick={handleLoadMore}>Load More</button>
         </div>
     )
 }

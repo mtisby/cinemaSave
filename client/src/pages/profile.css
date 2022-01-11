@@ -135,6 +135,18 @@ hr{
     transform: translateY(-0.25em);
 }
 
+
+.pinrec{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pinrec{
+    margin: 2em;
+}
+
 /*
     boards
 */

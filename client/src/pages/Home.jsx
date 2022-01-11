@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import { ReactSession } from 'react-client-session';
 import { Navbar } from '../components/Navbar.jsx';
 import { PinReccomendations } from '../components/PinReccomendations.jsx';
