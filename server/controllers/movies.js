@@ -60,7 +60,7 @@ const getBoard = async (req, res) => {
     const user = await User.findById(userID)
     let sendUser = null
 
-    if (user.boards) {
+    if (user.boards != null) {
         sendUser = await user.populate('boards.pins')
     }
     

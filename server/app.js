@@ -126,37 +126,45 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
     }
 
     let user = await User.findById(userID).populate('pins');
-    let userPins = user.pins;
-    let routeName = "/home"
-    let mongoCriteria = findTopGenres(user, routeName);
-    
-    let allGenresMovies = [];
+    let movieArr;
 
-    for (var i = 0; i < mongoCriteria.length; i++) { 
-        let movieByGenres = await Movie.find(mongoCriteria[i]);
-        allGenresMovies.push(movieByGenres);
-    }    
+    if(user.pins.length > 0){
+        let userPins = user.pins;
+        let routeName = "/home"
+        let mongoCriteria = findTopGenres(user, routeName);
+        
+        let allGenresMovies = [];
 
-    let allMovies = []
-    for (var i = 0; i < allGenresMovies.length; i++) { 
-        for (var j = 0; j < allGenresMovies[i].length; j++) { 
-            let included = false;
+        for (var i = 0; i < mongoCriteria.length; i++) { 
+            let movieByGenres = await Movie.find(mongoCriteria[i]);
+            allGenresMovies.push(movieByGenres);
+        }    
 
-            for (var k = 0; k < userPins.length; k++) { 
-                if (userPins[k].title === allGenresMovies[i][j].title) { 
-                    included = true;
+        let allMovies = [];
+        for (var i = 0; i < allGenresMovies.length; i++) { 
+            for (var j = 0; j < allGenresMovies[i].length; j++) { 
+                let included = false;
+
+                for (var k = 0; k < userPins.length; k++) { 
+                    if (userPins[k].title === allGenresMovies[i][j].title) { 
+                        included = true;
+                    }
+                }
+
+                if (included === false) {
+                    allMovies.push(allGenresMovies[i][j])
                 }
             }
-
-            if (included === false) {
-                allMovies.push(allGenresMovies[i][j])
-            }
         }
+
+        movieArr = shuffle(allMovies)
+    } else {
+        let movies = await Movie.find({});
+        movieArr = movies
     }
+    
 
-    allMovies = shuffle(allMovies)
-
-    res.json(allMovies)
+    res.json(movieArr)
 })
 
 app.use('/authentication', UserRoutes);
