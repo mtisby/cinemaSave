@@ -20,7 +20,7 @@ const movieSchema = new Schema({
         required: false
     },
     stream: {
-        type: String,
+        type: Array,
         required: false
     },
     description: {

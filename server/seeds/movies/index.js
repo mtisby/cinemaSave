@@ -25,7 +25,7 @@ const omdb_url2 = `&apikey=${ process.env.OMDB_KEY }`;
 // const watchmode_url1 = `https://api.watchmode.com/v1/search/?apiKey=${process.env.WATCHMODE_KEY}&search_field=name&search_value=`
 // const watchmode_url2 = '/sources/'
 const watchmode_url1 = `https://api.watchmode.com/v1/title/`
-const watchmode_url2 = `/sources/?apiKey=${process.env.WATCHMODE_KEY}`;
+const watchmode_url2 = `/sources/?apiKey=${process.env.WATCHMODE_KEY_TWO}`;
 
 // get watchmode csv data
 const watchmode_csvfile = './title_id_map.csv'
@@ -52,7 +52,7 @@ fs.createReadStream(watchmode_csvfile)
 
                 console.log(`...fetched ${N} movies`)
                 let imdbMovies = imdbData['items'];
-              
+                
                 for (var i = 0; i < N; i++) {
                     let imdbMovie = imdbMovies[i];
 
@@ -70,6 +70,7 @@ fs.createReadStream(watchmode_csvfile)
                     catch {
                         queried_ID = ''
                     }
+                    
 
                     if (queried_ID != '') {
                         let watchmodeData = fetch(watchmode_url1 + queried_ID + watchmode_url2)
@@ -82,10 +83,14 @@ fs.createReadStream(watchmode_csvfile)
                                 let watchmodeData_Parsed = finalVals[0];
                                 let omdbData_Parsed = finalVals[1];
 
-                                let stream = watchmodeData_Parsed.web_url;
-                                if (stream === undefined) {
-                                    stream = "none"
-                                }
+                                let stream = [];
+
+                                let watchmodeKeys = Object.keys(watchmodeData_Parsed);
+                                watchmodeKeys.map((movie) =>{
+                                    if(watchmodeData_Parsed[movie].region === 'US' && watchmodeData_Parsed[movie].web_url != null){
+                                        stream.push(watchmodeData_Parsed[movie].web_url)
+                                    }
+                                })
 
                                 const movie = new Movie({
                                     title: title,
@@ -97,7 +102,6 @@ fs.createReadStream(watchmode_csvfile)
                                     languages: omdbData_Parsed.Language,
                                     poster: poster
                                 })
-
                                 movie.save()
                             })
                             .catch(e => {
@@ -120,7 +124,6 @@ fs.createReadStream(watchmode_csvfile)
                                     languages: omdbData_Parsed.Language,
                                     poster: poster
                                 })
-    
                                 movie.save()
                             })
                             .catch(e => {
