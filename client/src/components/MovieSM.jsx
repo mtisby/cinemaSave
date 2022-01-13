@@ -10,6 +10,7 @@ export const MovieSM = (props) => {
     const userid = ReactSession.get("userid");
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
+    const [streamingServices, setStreamingServices] = useState([]);
       useEffect(() => {
         movieFunctions
           .getByID({
@@ -18,12 +19,13 @@ export const MovieSM = (props) => {
           })
           .then((response) => {
               console.log('promise fulfilled')
-              let req = response.data
-              return req
+              let res = response.data
+              return res
           })
-        .then((req) => {
-            setMovie(req)
-            console.log(req)
+        .then((res) => {
+            setMovie(res.movie)
+            setStreamingServices(res.services)
+            console.log(res)
           })
       }, []);
 
@@ -44,12 +46,17 @@ export const MovieSM = (props) => {
   let genres = movie.genre + ''
   genres = genres.split(',')
  
-  const allgenres= genres.map((i) => {
+  const allgenres = genres.map((i) => {
     return (
       <div className='genre'>
         { i }
       </div>)
   });
+
+  // let streamKeys = Object.keys(movie.stream)
+  // const streaming = streamKeys.map((service) => {
+    
+  // })
 
     return (
       <div className="movie-show-pg">
@@ -64,8 +71,8 @@ export const MovieSM = (props) => {
             <div className="allgenres">{allgenres}</div>
             <h4>{movie.description}</h4>
             <h5>languages: {movie.languages}</h5>
-        
-            <h5>Watch it here: { movie.stream }</h5>
+
+            <h5>Watch it here: { }</h5>
           </div>
         </div>
       </div>
