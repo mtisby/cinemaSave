@@ -1,8 +1,9 @@
 import { ReactSession } from 'react-client-session';
 import React, { useEffect, useState } from 'react';
 import movieFunctions from "../api/index.js";
-import { Link } from 'react-router-dom';
 import { EditBoardPopup } from '../components/EditBoardPopup.jsx';
+import { Navbar } from '../components/Navbar.jsx';
+import { PinReccomendations } from '../components/PinReccomendations.jsx';
 
 // style sheets
 import './profile.css';
@@ -35,11 +36,9 @@ function ShowIndBoard() {
           body: JSON.stringify(props)
         })
         .then((response) => {
-            console.log("removing?")
             response = response.json()
             return response
         }).then((data) => {
-            console.log(data)
             setBoard(data.boards)
             setPins(data.pins)
         })
@@ -50,7 +49,6 @@ function ShowIndBoard() {
     }
 
     useEffect(() => {
-        console.log(boardID)
         movieFunctions
             .getProfileBoard(userid, boardID)
             .then((response) => {
@@ -72,20 +70,6 @@ function ShowIndBoard() {
             })
     }, []);
 
-    const suggestedPins = Object.keys(movie).map(function (key) {
-        return (
-       <div className='movie-contianer-profile'>
-           <img src={movie[key].poster} alt={ `${movie[key].title} poster`} className='poster'/>
-            <div className='movie-descrip'>
-                <h3>{movie[key].title}</h3>
-                <h5>imdb: { movie[key].imdbRating } </h5>
-                <h5>genre(s): { movie[key].genre } </h5>
-            </div>
-            <button className='save-btn' onClick={() => handleSave({ 'movieID': movie[key]._id, 'userID': userid, 'boardID': boardID })}>save</button>
-       </div>
-        )
-    })
-
     const boardPins = pins.slice(0).reverse().map(function (movie) {
         return (
        <div className='board-movies'>
@@ -102,8 +86,7 @@ function ShowIndBoard() {
 
   return (
     <div>
-        <Link to="/home">Home</Link> <br />
-        <Link to={`/profile/${userid}`}>Profile</Link>
+        <Navbar />
           <div className="showBoard">
             <div className='menu'>
                 <button onClick={handleEdit}>edit board</button>
@@ -117,7 +100,7 @@ function ShowIndBoard() {
 
             <h2>Here are some suggestions</h2>
             <div className='movies-contianer'>
-                { suggestedPins }
+                <PinReccomendations userid= { userid }/>
             </div>
         </div>
     </div>

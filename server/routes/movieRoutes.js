@@ -3,7 +3,7 @@ import { Movie } from "../models/movies.js";
 import { Stream } from "../models/streaming.js";
 import isLoggedIn from "../middleware/middleware.cjs"
 import { Strategy } from "passport-local";
-
+import {streamWeights} from "../algos/streamWeights.js"
 const debugLvl1 = true;
 
 var router = express.Router();
@@ -19,9 +19,15 @@ router.post('/:id', isLoggedIn, async (req, res) => {
     try {
         const movie_id = req.body.movie_id.movie_id
         try {
-            const movie = await Movie.findById(movie_id)
             const services = await Stream.find({})
-            res.json({'movie':movie,'services':services})
+            const movie = await Movie.findById(movie_id)
+            let streams = movie.stream;
+
+            streams = streamWeights(streams, services);
+            console.log(streams)
+            
+            
+            res.json({'movie':movie,'services':services, 'streamMovie':streams})
         }  catch (e) { 
             console.log('error')
         }

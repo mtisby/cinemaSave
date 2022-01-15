@@ -61,9 +61,6 @@ function Profile() {
     setPopupVal(true)
   }
 
-  console.log('pins', typeof pins, pins)
-  console.log('boards', boards)
-
   const allPins = pins.slice(0).reverse().map((i) => {
       return (
         <div className='movie-contianer-profile'>

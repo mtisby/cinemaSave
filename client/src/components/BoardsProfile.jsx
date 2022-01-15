@@ -7,8 +7,6 @@ export const BoardsProfile = (props) => {
     const userid = props.data;
     const [boards, setBoards] = useState([]);
 
-    console.log('am i even working?')
-
     useEffect(() => {
         movieFunctions
           .getProfileBoards(userid)
@@ -26,7 +24,7 @@ export const BoardsProfile = (props) => {
         let bkImg = false;
         let imgsrc = null;
         let imgalt = null;
-        console.log('zoo tycoon', i.pins)
+        
         if (i.pins[0].poster != '') {
             imgsrc = i.pins[0].poster;
             imgalt = i.pins.title

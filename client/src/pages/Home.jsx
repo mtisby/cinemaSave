@@ -11,8 +11,6 @@ function Home() {
   return (
     <div className="Home-Pg pgMargin">
       <Navbar />
-      <h1>Home Page</h1>
-      <br />
       <div className='movies-contianer'>
         <PinReccomendations userid= { userid }/>
       </div>

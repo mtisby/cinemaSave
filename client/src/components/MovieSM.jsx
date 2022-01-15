@@ -10,7 +10,8 @@ export const MovieSM = (props) => {
     const userid = ReactSession.get("userid");
     const { id } = useParams();
     const [movie, setMovie] = useState([]);
-    const [streamingServices, setStreamingServices] = useState([]);
+    const [streamMovie, setStreamMovie] = useState([]);
+    
       useEffect(() => {
         movieFunctions
           .getByID({
@@ -24,8 +25,7 @@ export const MovieSM = (props) => {
           })
         .then((res) => {
             setMovie(res.movie)
-            setStreamingServices(res.services)
-            console.log(res)
+            setStreamMovie(res.streamMovie)
           })
       }, []);
 
@@ -43,6 +43,14 @@ export const MovieSM = (props) => {
       })
   }
 
+  const services = streamMovie.slice(0,3).map((service)=>{
+    return(
+      <div className="streamLogo">
+          <a href={service[0]}><img src={service[2]} alt={service[3]} /></a>
+      </div>
+    )
+  })
+
   let genres = movie.genre + ''
   genres = genres.split(',')
  
@@ -53,27 +61,28 @@ export const MovieSM = (props) => {
       </div>)
   });
 
-  // let streamKeys = Object.keys(movie.stream)
-  // const streaming = streamKeys.map((service) => {
-    
-  // })
-
     return (
       <div className="movie-show-pg">
-        <div className="movie-container-row">
-          <div className="div-left">
-            <img className="poster" src={movie.poster} alt={`${movie.title} poster`} />
-            <button onClick={() => handleButtonClick({ 'movieID': movie._id, 'userID': userid })}>save</button>
+        <div className="movie-container-col">
+          <div className="movie-container-row">
+            <div className="div-left">
+              <img className="poster" src={movie.poster} alt={`${movie.title} poster`} />
+              <div className='save-btn-container'><button className='save-btn' onClick={() => handleButtonClick({ 'movieID': movie._id, 'userID': userid })}></button></div>
+            </div>
+            <div className="movie-desrip-show">
+              <h1>{movie.title}</h1>
+              <h3>{movie.imdbRating}</h3>
+              <div className="allgenres">{allgenres}</div>
+              <h4>{movie.description}</h4>
+              <h5>languages: {movie.languages}</h5>
+            </div>
           </div>
-          <div className="movie-desrip-show">
-            <h1>{movie.title}</h1>
-            <h3>{movie.imdbRating}</h3>
-            <div className="allgenres">{allgenres}</div>
-            <h4>{movie.description}</h4>
-            <h5>languages: {movie.languages}</h5>
-
-            <h5>Watch it here: { }</h5>
-          </div>
+          <div className="streamContainerParent">
+              <h5>Watch it here:</h5>
+              <div className="streamContainer">
+                {services}
+              </div>
+            </div>
         </div>
       </div>
 

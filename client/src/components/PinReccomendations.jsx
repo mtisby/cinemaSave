@@ -47,7 +47,6 @@ export const PinReccomendations = (props) => {
         .getAll(userid)
         .then((response) => {
           console.log('promise fulfilled')
-          console.log(response)
           setMovies(response.data)
           setMovieSubset(response.data.splice(0, 50));
           setSubsetSlice(50);
@@ -55,9 +54,7 @@ export const PinReccomendations = (props) => {
     }, []);
 
     const handleLoadMore = () =>{
-      console.log(moveieSubset.length)
       let newSubset = subsetSlice + 50;
-      console.log('new subset', newSubset)
       let newMovies = movie.slice(subsetSlice, newSubset) 
       setSubsetSlice(newSubset)
       setMovieSubset(newMovies)

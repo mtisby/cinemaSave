@@ -5,15 +5,24 @@
     justify-content: center;
 }
 
-.movie-container-row{
+.movie-container-col{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
     background-color: #F0F0F0;
     border: 1px solid #F0F0F0;
     border-radius: 2.5em;
+
+    width: 65vw;
+}
+
+.movie-container-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
     width: 65vw;
 }
@@ -48,4 +57,42 @@
 
     margin: 2em;
     padding: 1em;
+}
+
+.streamContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.streamContainerParent{
+    margin: 1em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.streamLogo img{
+    width: 3em;
+    border: .1px solid #F0F0F0;
+    border-radius: 50%;
+}
+
+.save-btn-container{
+    background-image: url('https://res.cloudinary.com/dr0ofxgkz/image/upload/v1640659135/cinema-save/logo/Movie_Rater_vq22gf.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 4em;
+    height: 4em;
+}
+
+.save-btn{
+    margin: 1em;
+    width: 5em;
+    height: 3em;
+    background-color: transparent;
+    border: none;
 }
