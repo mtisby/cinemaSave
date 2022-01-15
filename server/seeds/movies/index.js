@@ -10,7 +10,7 @@ import fs from 'fs'
 import dotenv from "dotenv"
 dotenv.config({ path: "../../.env" })
 
-const dbUrl = 'mongodb://localhost:27017/cinema-save';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/cinema-save';
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -22,8 +22,6 @@ db.once("open", () => {
 const imdb_url = `https://imdb-api.com/en/API/MostPopularMovies/${process.env.IMDB_KEY}`;
 const omdb_url1 = `http://www.omdbapi.com/?t=`
 const omdb_url2 = `&apikey=${ process.env.OMDB_KEY }`;
-// const watchmode_url1 = `https://api.watchmode.com/v1/search/?apiKey=${process.env.WATCHMODE_KEY}&search_field=name&search_value=`
-// const watchmode_url2 = '/sources/'
 const watchmode_url1 = `https://api.watchmode.com/v1/title/`
 const watchmode_url2 = `/sources/?apiKey=${process.env.WATCHMODE_KEY_TWO}`;
 

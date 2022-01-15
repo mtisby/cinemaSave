@@ -41,7 +41,7 @@ import mongoSanitize from "express-mongo-sanitize"
 let debugLvl1 = true;
 
 
-const dbUrl = 'mongodb://localhost:27017/cinema-save';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/cinema-save';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
