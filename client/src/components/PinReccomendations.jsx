@@ -56,8 +56,11 @@ export const PinReccomendations = (props) => {
     const handleLoadMore = () =>{
       let newSubset = subsetSlice + 50;
       let newMovies = movie.slice(subsetSlice, newSubset) 
-      setSubsetSlice(newSubset)
-      setMovieSubset(newMovies)
+
+      if(newSubset < movie.length){
+        setSubsetSlice(newSubset)
+        setMovieSubset(newMovies)
+      }
     }
 
     const movies = moveieSubset.map((i) => {
