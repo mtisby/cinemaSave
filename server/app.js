@@ -157,6 +157,13 @@ app.post("/home", cors(), isLoggedIn, async (req, res) => {
             }
         }
 
+        let movies = await Movie.find({});;
+        movies.map((movie) => {
+            if (allMovies.contains(movie) === false){
+                allMovies.push(movie)
+            }
+        })
+
         movieArr = shuffle(allMovies)
     } else {
         let movies = await Movie.find({});
