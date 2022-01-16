@@ -30,7 +30,7 @@ export const MovieSM = (props) => {
       }, []);
 
     const handleButtonClick = (e) => {
-      fetch('http://localhost:3060/authentication/profile/addpin/', {
+      fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/addpin/', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

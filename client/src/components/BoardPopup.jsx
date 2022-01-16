@@ -17,7 +17,7 @@ export const BoardPopup = (props) => {
             'userID': userid
         }
 
-        fetch('http://localhost:3060/authentication/profile/addboard/', {
+        fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/addboard/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)

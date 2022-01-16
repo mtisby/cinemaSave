@@ -13,7 +13,7 @@ function Register() {
         e.preventDefault();
         const user = { username, email, password };
 
-        fetch('http://localhost:3060/authentication/register/', {
+        fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/register/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

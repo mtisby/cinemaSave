@@ -40,7 +40,7 @@ function Profile() {
 
   const handleButtonClick = (props) => {
     
-    fetch('http://localhost:3060/authentication/profile/deletepin/', {
+    fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/deletepin/', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(props)
