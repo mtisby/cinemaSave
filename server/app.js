@@ -61,6 +61,7 @@ db.once("open", () => {
 
 const app = express();
 const port = process.env.PORT || 3060;
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN;
 
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
@@ -68,7 +69,7 @@ app.use(methodOverride('_method'))
 app.use(express.static(__dirname + '/public'));
 
 
-const secret = 'hello'
+const secret = process.env.SECRET
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -100,7 +101,7 @@ app.use(session(sessionConfig))
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors({
-    origin: "https://modest-shirley-e38b5f.netlify.app/",
+    origin: "http://localhost:3000",
     credentials: true
 }))
 
@@ -116,6 +117,20 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 })
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", CLIENT_ORIGIN);
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE");
+    res.header("Access-Control-Allow-Credentials", true);
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204);
+    }
+    next();
+  });
 
 app.post("/home", cors(), isLoggedIn, async (req, res) => {
     let userID = req.body.userid
