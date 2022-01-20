@@ -19,7 +19,7 @@ export const EditBoardPopup = (props) => {
                 'description': boarddescrip
             }
     
-            fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/editboard/', {
+            fetch('https://cinema-save.herokuapp.com/authentication/profile/editboard/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
@@ -34,7 +34,7 @@ export const EditBoardPopup = (props) => {
                 'boardID': boardID,
             }
     
-            fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/deleteboard/', {
+            fetch('https://cinema-save.herokuapp.com/authentication/profile/deleteboard/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)

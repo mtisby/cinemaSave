@@ -14,7 +14,7 @@ function Login(props) {
         e.preventDefault();
         const user = { username, password };
 
-        fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/login/', {
+        fetch('https://cinema-save.herokuapp.com/authentication/login/', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

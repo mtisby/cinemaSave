@@ -11,7 +11,7 @@ export const PinReccomendations = (props) => {
     const handleMovieID = (props) => {
     const id = props;
           
-    fetch('https://enigmatic-sierra-36050.herokuapp.com/movie/id', {
+    fetch('https://cinema-save.herokuapp.com/movie/id', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })
@@ -27,7 +27,7 @@ export const PinReccomendations = (props) => {
       
     const handleButtonClick = (props) => {
           
-        fetch('https://enigmatic-sierra-36050.herokuapp.com/authentication/profile/addpin/', {
+        fetch('https://cinema-save.herokuapp.com/authentication/profile/addpin/', {
           method: 'POST',
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(props)
